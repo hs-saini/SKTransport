@@ -154,10 +154,17 @@
   function applyLanguage() {
     document.documentElement.lang = language;
     document.body.classList.toggle("hindi", language === "hi");
-    document.title = language === "hi" ? `${settings.business} | हर सामान, मंज़िल तक` : `${settings.business} | Every load. On the move.`;
-    $('meta[name="description"]').content = language === "hi"
-      ? "एस के ट्रांसपोर्ट, देवबंद से पूरे भारत में डिलीवरी, एक्सप्रेस डिलीवरी पूछताछ, GST बिलिंग और 24×7 बुकिंग सहायता।"
-      : "S K Transport, Deoband: pan-India delivery, express delivery enquiries, GST billing and 24x7 booking assistance.";
+    document.title = language === "hi"
+      ? `${settings.business} देवबंद | पूरे भारत में ट्रांसपोर्ट`
+      : `${settings.business} Deoband | All-India Truck & Goods Transport`;
+    const description = language === "hi"
+      ? "एस के ट्रांसपोर्ट, शुगर मिल के पास नूपुर, देवबंद, उत्तर प्रदेश से पूरे भारत में ट्रक, डीसीएम, मिनी ट्रक, कार और ट्रैक्टर ट्रॉली ट्रांसपोर्ट। उपलब्धता और बुकिंग के लिए कॉल करें।"
+      : "S K Transport, based near Sugar Mill in Deoband, Uttar Pradesh, provides truck, DCM, mini truck, car and tractor trolley transport across India. Call for availability and booking enquiries.";
+    $('meta[name="description"]').content = description;
+    $('meta[property="og:title"]').content = document.title;
+    $('meta[property="og:description"]').content = description;
+    $('meta[name="twitter:title"]').content = document.title;
+    $('meta[name="twitter:description"]').content = description;
     $$("[data-i18n]").forEach((node) => { node.textContent = t(node.dataset.i18n); });
     $$("[data-i18n-html]").forEach((node) => { node.innerHTML = t(node.dataset.i18nHtml); });
     $$("[data-i18n-placeholder]").forEach((node) => { node.placeholder = t(node.dataset.i18nPlaceholder); });
