@@ -2,11 +2,6 @@
   "use strict";
   const isAdminPage = new URLSearchParams(window.location.search).get("admin") === "1";
 
-  const KEYS = {
-    settings: "sk-transport-settings-v1",
-    adminPassword: "sk-transport-admin-password-v1",
-    adminUsername: "sk-transport-admin-username-v1"
-  };
   const DEFAULT_MENU_ITEMS = [
     { en: "Our fleet", hi: "हमारी गाड़ियाँ", href: "#services" },
     { en: "Services", hi: "सेवाएँ", href: "#capabilities" },
@@ -49,9 +44,9 @@
       bookingFormTitle: "BOOKING ENQUIRY", formCount: "NO. <b>01</b> / 01", chooseVehicle: "01 &nbsp; PICK YOUR VEHICLE <sup>*</sup>", nameLabel: "YOUR NAME <sup>*</sup>", phoneLabel: "PHONE NUMBER <sup>*</sup>", pickupLabel: "PICKUP LOCATION", dropLabel: "DESTINATION", dateLabel: "WHEN DO YOU NEED IT?", loadLabel: "WHAT ARE WE MOVING?", messageLabel: "ANYTHING ELSE WE SHOULD KNOW?",
       namePlaceholder: "e.g. Rahul Sharma", phonePlaceholder: "Your 10-digit number", pickupPlaceholder: "City, state, PIN or landmark", dropPlaceholder: "City, state, PIN or landmark", loadPlaceholder: "Furniture, goods, vehicle...", messagePlaceholder: "Add details about your load or trip...", submitBooking: "Prepare my booking", bookingConsent: "I agree to share these booking details with S K Transport by email. The email provider may retain submissions for up to 30 days.", formPrivacy: "Booking details are emailed to the business address above. SMS is not sent automatically; open a prepared SMS or WhatsApp message to contact us.",
       contactEyebrow: "HERE WHEN YOU NEED US", contactTitle: "GOOD TO GO?<br><span>LET'S TALK.</span>", findUs: "FIND US", callUs: "GIVE US A RING", emailUs: "EMAIL US", footerTag: "EVERY LOAD. ON THE MOVE.", adminButton: "ADMIN",
-      privateAccess: "PRIVATE ACCESS", adminTitle: "TRANSPORT<br><span>CONTROL ROOM.</span>", adminUsername: "ADMIN USERNAME", createPassword: "CREATE PASSWORD", setPassword: "Set password & continue", adminWarning: "This static-site admin is browser-local, not secure for public production use. Use a private device; clearing browser data removes saved settings.", siteSettings: "SITE SETTINGS", dashboardTitle: "YOUR BUSINESS.<br><span>YOUR CALL.</span>", logout: "LOG OUT", businessDetails: "BUSINESS DETAILS", businessName: "BUSINESS NAME", addressLabel: "ADDRESS", primaryPhone: "PRIMARY PHONE", bookingPhone: "BOOKING PHONE", emailPrimary: "PRIMARY EMAIL (REQUIRED FOR BOOKINGS)", emailAlternate: "ALTERNATE EMAIL (OPTIONAL)", emailPrimaryPlaceholder: "Bookings go to this email", alternateEmailPlaceholder: "Booking email copy (optional)", phoneContacts: "PHONE CONTACTS", primaryMobile: "PRIMARY MOBILE", alternateMobile: "ALTERNATE MOBILE", emailOptional: "EMAIL (OPTIONAL)", emailPlaceholder: "Add an email when you have one", vehiclesHeading: "VEHICLES & PHOTOS", newVehiclePlaceholder: "New vehicle name", newVehicleAria: "New vehicle name", addVehicle: "+ ADD VEHICLE", adminNote: "Changes, including vehicle photos, are saved only in this browser and do not update the public site for other visitors.", saveChanges: "Save changes", closeAdmin: "Close admin panel",
+      privateAccess: "PRIVATE ACCESS", adminTitle: "TRANSPORT<br><span>CONTROL ROOM.</span>", adminUsername: "ADMIN USERNAME", createPassword: "CREATE PASSWORD", setPassword: "Set password & continue", adminWarning: "Admin access is protected by a server-side password. Saved changes are shared with all website visitors.", siteSettings: "SITE SETTINGS", dashboardTitle: "YOUR BUSINESS.<br><span>YOUR CALL.</span>", logout: "LOG OUT", businessDetails: "BUSINESS DETAILS", businessName: "BUSINESS NAME", addressLabel: "ADDRESS", primaryPhone: "PRIMARY PHONE", bookingPhone: "BOOKING PHONE", emailPrimary: "PRIMARY EMAIL (REQUIRED FOR BOOKINGS)", emailAlternate: "ALTERNATE EMAIL (OPTIONAL)", emailPrimaryPlaceholder: "Bookings go to this email", alternateEmailPlaceholder: "Booking email copy (optional)", phoneContacts: "PHONE CONTACTS", primaryMobile: "PRIMARY MOBILE", alternateMobile: "ALTERNATE MOBILE", emailOptional: "EMAIL (OPTIONAL)", emailPlaceholder: "Add an email when you have one", vehiclesHeading: "VEHICLES & PHOTOS", newVehiclePlaceholder: "New vehicle name", newVehicleAria: "New vehicle name", addVehicle: "+ ADD VEHICLE", adminNote: "Changes saved here update shared website settings for every visitor.", saveChanges: "Save changes", closeAdmin: "Close admin panel",
       invalidPhone: "Please enter a valid phone number with at least 10 digits.", smsReady: "Your enquiry is ready to send.", smsInstructions: "Choose a number below. Your messaging app will open with the booking details filled in; review and tap send. Repeat for the other number if you want both contacts to receive it.", emailDraftNotice: " An email draft is available too.", openSms: "Open SMS to", prepareEmail: "Prepare email to", copyBooking: "Copy booking details", copied: "Copied", copyUnavailable: "Copy unavailable — select SMS above", bookingHeading: "Booking enquiry", dateFlexible: "Flexible / not specified", notSpecified: "Not specified", none: "None", vehicleLabel: "Vehicle", customerName: "Name", customerPhone: "Phone", pickup: "Pickup", drop: "Drop", tripDate: "Date", load: "Load", notes: "Notes",
-      adminLoginExisting: "Sign in to manage business details and your public vehicle list.", adminLoginNew: "Set an admin password for this browser to manage your public business details and vehicle list.", adminPassword: "ADMIN PASSWORD", login: "Log in", passwordMismatch: "Those admin credentials don't match. Please try again.", secureContext: "Password setup requires a secure browser context (HTTPS or localhost).", keepOneVehicle: "Keep at least one vehicle in the public fleet.", maxVehicles: "The public vehicle list is limited to 20 items.", duplicateVehicle: "That vehicle is already on the list.", addBeforeSave: "Add at least one vehicle before saving.", saved: "Changes saved in this browser.", saveFailed: "Changes could not be saved. Check browser storage settings and try again."
+      adminLoginExisting: "Sign in to manage shared business details, routes and vehicles.", adminLoginNew: "Set an admin password for this browser to manage your public business details and vehicle list.", adminPassword: "ADMIN PASSWORD", login: "Log in", passwordMismatch: "Incorrect username or password.", adminUnavailable: "Admin service is unavailable. Please try again shortly.", logoutFailed: "Admin logout could not be confirmed. Please try again.", secureContext: "Admin sign-in requires a secure HTTPS connection.", keepOneVehicle: "Keep at least one vehicle in the public fleet.", maxVehicles: "The public vehicle list is limited to 20 items.", duplicateVehicle: "That vehicle is already on the list.", addBeforeSave: "Add at least one vehicle before saving.", saved: "Changes saved and published for all visitors.", saveFailed: "Changes could not be saved. Please try again."
       ,deliveryHeading: "Booking details are emailed automatically", deliveryTo: "Send to", emailActivationNote: "First use: confirm the activation email from FormSubmit before accepting live bookings.", smsDeliveryNote: "SMS is prepared for you to review and send.", emailLive: "EMAIL DELIVERY", whatsappLabel: "WhatsApp us", whatsappAria: "Chat with S K Transport on WhatsApp", emailSending: "Sending booking email…", emailSent: "Booking email sent successfully.", emailSetupRequired: "The email service needs activation. Check the activation email sent by FormSubmit to the primary email address.", emailSendFailed: "We couldn't send the booking email. Please try again or use WhatsApp/SMS below.", formSubmitError: "Booking email could not be sent.", whatsappBooking: "Send booking on WhatsApp", smsFallback: "Or prepare an SMS to"
     },
     hi: {
@@ -64,9 +59,9 @@
       bookingFormTitle: "बुकिंग की जानकारी", formCount: "नंबर <b>01</b> / 01", chooseVehicle: "01 &nbsp; अपनी गाड़ी चुनें <sup>*</sup>", nameLabel: "आपका नाम <sup>*</sup>", phoneLabel: "आपका मोबाइल नंबर <sup>*</sup>", pickupLabel: "पिकअप की जगह", dropLabel: "मंज़िल", dateLabel: "गाड़ी कब चाहिए?", loadLabel: "क्या सामान ले जाना है?", messageLabel: "कोई और जानकारी?",
       namePlaceholder: "जैसे: राहुल शर्मा", phonePlaceholder: "10 अंकों का मोबाइल नंबर", pickupPlaceholder: "शहर, राज्य, पिन कोड या पहचान", dropPlaceholder: "शहर, राज्य, पिन कोड या पहचान", loadPlaceholder: "फर्नीचर, सामान, गाड़ी...", messagePlaceholder: "सामान या रास्ते की जानकारी लिखें...", submitBooking: "बुकिंग की जानकारी तैयार करें", bookingConsent: "मैं बुकिंग की यह जानकारी ईमेल से S K Transport को भेजने के लिए सहमत हूँ। ईमेल सेवा इस जानकारी को 30 दिनों तक रख सकती है।", formPrivacy: "बुकिंग की जानकारी ऊपर दिए कारोबार के ईमेल पर भेजी जाएगी। SMS अपने आप नहीं जाता—तैयार SMS या WhatsApp संदेश खोलकर भेजें।",
       contactEyebrow: "ज़रूरत पड़ने पर हम साथ हैं", contactTitle: "तैयार हैं?<br><span>बात करें।</span>", findUs: "हमारा पता", callUs: "हमें कॉल करें", emailUs: "ईमेल करें", footerTag: "हर सामान। मंज़िल तक।", adminButton: "एडमिन",
-      privateAccess: "निजी प्रवेश", adminTitle: "ट्रांसपोर्ट<br><span>कंट्रोल पैनल।</span>", adminUsername: "एडमिन यूज़रनेम", createPassword: "पासवर्ड बनाएं", setPassword: "पासवर्ड बनाएं और आगे बढ़ें", adminWarning: "यह एडमिन पैनल इसी ब्राउज़र में काम करता है; सार्वजनिक वेबसाइट के लिए सुरक्षित लॉगिन नहीं है। निजी डिवाइस का उपयोग करें। ब्राउज़र डेटा हटाने पर सेटिंग मिट सकती है।", siteSettings: "वेबसाइट सेटिंग", dashboardTitle: "आपका कारोबार।<br><span>आपके फैसले।</span>", logout: "लॉग आउट", businessDetails: "कारोबार की जानकारी", businessName: "कारोबार का नाम", addressLabel: "पता", primaryPhone: "मुख्य फ़ोन नंबर", bookingPhone: "वैकल्पिक फ़ोन नंबर", emailPrimary: "मुख्य ईमेल (बुकिंग के लिए ज़रूरी)", emailAlternate: "वैकल्पिक ईमेल (ज़रूरी नहीं)", emailPrimaryPlaceholder: "बुकिंग इस ईमेल पर आएगी", alternateEmailPlaceholder: "बुकिंग ईमेल की कॉपी (ज़रूरी नहीं)", phoneContacts: "फ़ोन संपर्क", primaryMobile: "मुख्य मोबाइल नंबर", alternateMobile: "वैकल्पिक मोबाइल नंबर", emailOptional: "ईमेल (वैकल्पिक)", emailPlaceholder: "ईमेल होने पर यहाँ लिखें", vehiclesHeading: "गाड़ियाँ और तस्वीरें", newVehiclePlaceholder: "नई गाड़ी का नाम", newVehicleAria: "नई गाड़ी का नाम", addVehicle: "+ गाड़ी जोड़ें", adminNote: "तस्वीरों सहित बदलाव सिर्फ़ इसी ब्राउज़र में सेव होंगे; दूसरे लोगों की साइट पर नहीं दिखेंगे।", saveChanges: "बदलाव सेव करें", closeAdmin: "एडमिन पैनल बंद करें",
+      privateAccess: "निजी प्रवेश", adminTitle: "ट्रांसपोर्ट<br><span>कंट्रोल पैनल।</span>", adminUsername: "एडमिन यूज़रनेम", createPassword: "पासवर्ड बनाएं", setPassword: "पासवर्ड बनाएं और आगे बढ़ें", adminWarning: "एडमिन लॉगिन सर्वर-साइड पासवर्ड से सुरक्षित है। सेव किए बदलाव सभी वेबसाइट विज़िटर को दिखेंगे।", siteSettings: "वेबसाइट सेटिंग", dashboardTitle: "आपका कारोबार।<br><span>आपके फैसले।</span>", logout: "लॉग आउट", businessDetails: "कारोबार की जानकारी", businessName: "कारोबार का नाम", addressLabel: "पता", primaryPhone: "मुख्य फ़ोन नंबर", bookingPhone: "वैकल्पिक फ़ोन नंबर", emailPrimary: "मुख्य ईमेल (बुकिंग के लिए ज़रूरी)", emailAlternate: "वैकल्पिक ईमेल (ज़रूरी नहीं)", emailPrimaryPlaceholder: "बुकिंग इस ईमेल पर आएगी", alternateEmailPlaceholder: "बुकिंग ईमेल की कॉपी (ज़रूरी नहीं)", phoneContacts: "फ़ोन संपर्क", primaryMobile: "मुख्य मोबाइल नंबर", alternateMobile: "वैकल्पिक मोबाइल नंबर", emailOptional: "ईमेल (वैकल्पिक)", emailPlaceholder: "ईमेल होने पर यहाँ लिखें", vehiclesHeading: "गाड़ियाँ और तस्वीरें", newVehiclePlaceholder: "नई गाड़ी का नाम", newVehicleAria: "नई गाड़ी का नाम", addVehicle: "+ गाड़ी जोड़ें", adminNote: "यहाँ सेव किए बदलाव सभी वेबसाइट विज़िटर के लिए अपडेट होंगे।", saveChanges: "बदलाव सेव करें", closeAdmin: "एडमिन पैनल बंद करें",
       invalidPhone: "कृपया कम से कम 10 अंकों का सही मोबाइल नंबर भरें।", smsReady: "आपकी बुकिंग जानकारी भेजने के लिए तैयार है।", smsInstructions: "नीचे नंबर चुनें। आपकी मैसेज ऐप में बुकिंग की जानकारी SMS के रूप में खुलेगी—जाँचकर भेजें। दोनों नंबरों पर भेजने के लिए दूसरे नंबर के लिए भी यही करें।", emailDraftNotice: " ईमेल का ड्राफ़्ट भी तैयार है।", openSms: "SMS भेजें", prepareEmail: "ईमेल का ड्राफ़्ट", copyBooking: "बुकिंग जानकारी कॉपी करें", copied: "कॉपी हो गया", copyUnavailable: "कॉपी नहीं हो पाया — ऊपर SMS चुनें", bookingHeading: "बुकिंग की जानकारी", dateFlexible: "तारीख तय नहीं", notSpecified: "जानकारी नहीं दी", none: "कुछ नहीं", vehicleLabel: "गाड़ी", customerName: "नाम", customerPhone: "फ़ोन", pickup: "कहाँ से", drop: "कहाँ तक", tripDate: "तारीख", load: "सामान", notes: "अन्य जानकारी",
-      adminLoginExisting: "कारोबार की जानकारी और गाड़ियों की सूची बदलने के लिए लॉग इन करें।", adminLoginNew: "कारोबार की जानकारी और गाड़ियों की सूची बदलने के लिए इस ब्राउज़र पर एडमिन पासवर्ड बनाएं।", adminPassword: "एडमिन पासवर्ड", login: "लॉग इन", passwordMismatch: "यूज़रनेम या पासवर्ड सही नहीं है। दोबारा कोशिश करें।", secureContext: "पासवर्ड बनाने के लिए सुरक्षित ब्राउज़र (HTTPS या localhost) ज़रूरी है।", keepOneVehicle: "कम से कम एक गाड़ी सूची में रखें।", maxVehicles: "सूची में अधिकतम 20 गाड़ियाँ जोड़ी जा सकती हैं।", duplicateVehicle: "यह गाड़ी सूची में पहले से है।", addBeforeSave: "सेव करने से पहले कम से कम एक गाड़ी जोड़ें।", saved: "बदलाव इसी ब्राउज़र में सेव हो गए।", saveFailed: "बदलाव सेव नहीं हो पाए। ब्राउज़र स्टोरेज जाँचकर दोबारा कोशिश करें।",
+      adminLoginExisting: "कारोबार की जानकारी, रूट और गाड़ियों को मैनेज करने के लिए लॉग इन करें।", adminLoginNew: "कारोबार की जानकारी और गाड़ियों की सूची बदलने के लिए इस ब्राउज़र पर एडमिन पासवर्ड बनाएं।", adminPassword: "एडमिन पासवर्ड", login: "लॉग इन", passwordMismatch: "यूज़रनेम या पासवर्ड सही नहीं है। दोबारा कोशिश करें।", adminUnavailable: "एडमिन सेवा अभी उपलब्ध नहीं है। थोड़ी देर बाद दोबारा कोशिश करें।", logoutFailed: "एडमिन लॉगआउट की पुष्टि नहीं हो पाई। दोबारा कोशिश करें।", secureContext: "एडमिन लॉगिन के लिए सुरक्षित HTTPS कनेक्शन ज़रूरी है।", keepOneVehicle: "कम से कम एक गाड़ी सूची में रखें।", maxVehicles: "सूची में अधिकतम 20 गाड़ियाँ जोड़ी जा सकती हैं।", duplicateVehicle: "यह गाड़ी सूची में पहले से है।", addBeforeSave: "सेव करने से पहले कम से कम एक गाड़ी जोड़ें।", saved: "बदलाव सेव होकर सभी विज़िटर के लिए अपडेट हो गए।", saveFailed: "बदलाव सेव नहीं हो पाए। दोबारा कोशिश करें।",
       deliveryHeading: "बुकिंग की जानकारी ईमेल पर अपने आप भेजी जाएगी", deliveryTo: "ईमेल भेजें", emailActivationNote: "पहली बार: बुकिंग शुरू करने से पहले FormSubmit का एक्टिवेशन ईमेल कन्फ़र्म करें।", smsDeliveryNote: "SMS जाँचकर भेजने के लिए तैयार होगा।", emailLive: "ईमेल सेवा", whatsappLabel: "WhatsApp करें", whatsappAria: "S K Transport को WhatsApp संदेश भेजें", emailSending: "बुकिंग ईमेल भेज रहे हैं…", emailSent: "बुकिंग ईमेल सफलतापूर्वक भेज दिया गया।", emailSetupRequired: "ईमेल सेवा को सक्रिय करना होगा। FormSubmit द्वारा मुख्य ईमेल पर भेजे गए एक्टिवेशन ईमेल की पुष्टि करें।", emailSendFailed: "बुकिंग ईमेल नहीं भेज पाए। दोबारा कोशिश करें या नीचे WhatsApp/SMS का उपयोग करें।", formSubmitError: "बुकिंग ईमेल नहीं भेजा जा सका।", whatsappBooking: "बुकिंग WhatsApp पर भेजें", smsFallback: "या SMS तैयार करें"
     }
   };
@@ -202,37 +197,53 @@
   });
 
   function loadSettings() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(KEYS.settings) || "null");
-      if (!saved || typeof saved !== "object") {
-        return { ...structuredClone(DEFAULTS), vehiclePhotos: DEFAULTS.vehicles.map((_, index) => defaultVehiclePhoto(index)) };
-      }
-      const vehicles = Array.isArray(saved.vehicles) && saved.vehicles.length
-        ? saved.vehicles.filter((vehicle) => typeof vehicle === "string" && vehicle.trim()).slice(0, 20)
-        : [...DEFAULTS.vehicles];
-      const menuItems = Array.isArray(saved.menuItems)
+    return {
+      ...structuredClone(DEFAULTS),
+      vehiclePhotos: DEFAULTS.vehicles.map((_, index) => defaultVehiclePhoto(index))
+    };
+  }
+
+  function normalizeSettings(saved) {
+    if (!saved || typeof saved !== "object" || Array.isArray(saved)) {
+      throw new Error("The shared settings service returned invalid data.");
+    }
+    const vehicles = Array.isArray(saved.vehicles) && saved.vehicles.length
+      ? saved.vehicles.filter((vehicle) => typeof vehicle === "string" && vehicle.trim()).slice(0, 20)
+      : [...DEFAULTS.vehicles];
+    return {
+      ...DEFAULTS,
+      ...saved,
+      email: typeof saved.email === "string" ? saved.email : DEFAULTS.email,
+      alternateEmail: typeof saved.alternateEmail === "string" ? saved.alternateEmail : "",
+      secondary: typeof saved.secondary === "string" ? saved.secondary : DEFAULTS.secondary,
+      vehicles,
+      vehiclePhotos: vehicles.map((_, index) =>
+        typeof saved.vehiclePhotos?.[index] === "string" && validPhotoUrl(saved.vehiclePhotos[index])
+          ? saved.vehiclePhotos[index]
+          : defaultVehiclePhoto(index)),
+      menuItems: Array.isArray(saved.menuItems)
         ? saved.menuItems.filter((item) => item && typeof item.en === "string" && typeof item.hi === "string" && MENU_TARGETS.includes(item.href)).slice(0, MAX_MENU_ITEMS)
-        : structuredClone(DEFAULT_MENU_ITEMS);
-      const routes = Array.isArray(saved.routes)
+        : structuredClone(DEFAULT_MENU_ITEMS),
+      routes: Array.isArray(saved.routes)
         ? saved.routes.filter((route) => route && typeof route.from === "string" && typeof route.to === "string").slice(0, MAX_ROUTES)
-        : structuredClone(DEFAULT_ROUTES);
-      return {
-        ...DEFAULTS,
-        ...saved,
-        email: saved.email || DEFAULTS.email,
-        alternateEmail: saved.alternateEmail || "",
-        secondary: saved.secondary || DEFAULTS.secondary,
-        vehicles,
-        menuItems,
-        routes,
-        vehiclePhotos: vehicles.map((_, index) =>
-          typeof saved.vehiclePhotos?.[index] === "string" && validPhotoUrl(saved.vehiclePhotos[index])
-            ? saved.vehiclePhotos[index]
-            : defaultVehiclePhoto(index))
-      };
+        : structuredClone(DEFAULT_ROUTES)
+    };
+  }
+
+  async function requestSharedSettings() {
+    const response = await fetch("/api/settings", { cache: "no-store", credentials: "same-origin" });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Shared settings are unavailable.");
+    return normalizeSettings(data);
+  }
+
+  async function refreshSharedSettings() {
+    try {
+      settings = await requestSharedSettings();
+      renderSettings();
+      applyLanguage();
     } catch (error) {
-      console.error("Could not read saved S K Transport settings.", error);
-      return { ...structuredClone(DEFAULTS), vehiclePhotos: DEFAULTS.vehicles.map((_, index) => defaultVehiclePhoto(index)) };
+      console.error("Could not load shared S K Transport settings.", error);
     }
   }
 
@@ -577,26 +588,18 @@
   const dialog = $("#admin-dialog");
   const login = $("#admin-login");
   const dashboard = $("#admin-dashboard");
-  const passwordConfigured = () => Boolean(localStorage.getItem(KEYS.adminPassword) && localStorage.getItem(KEYS.adminUsername));
 
   function setLoginMode() {
-    const existing = passwordConfigured();
-    $("#admin-login-copy").textContent = existing ? t("adminLoginExisting") : t("adminLoginNew");
-    $("#admin-password-label").innerHTML = `${existing ? t("adminPassword") : t("createPassword")}<input name="password" type="password" autocomplete="${existing ? "current-password" : "new-password"}" ${existing ? "" : "minlength=\"8\""} required>`;
-    $("#admin-auth-submit").innerHTML = `<span>${existing ? t("login") : t("setPassword")}</span> <span>↗</span>`;
+    $("#admin-login-copy").textContent = t("adminLoginExisting");
+    $("#admin-auth-submit").innerHTML = `<span>${t("login")}</span> <span>↗</span>`;
     $("#admin-error").textContent = "";
-  }
-
-  async function digest(value) {
-    const encoded = new TextEncoder().encode(value);
-    const hash = await crypto.subtle.digest("SHA-256", encoded);
-    return [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
   }
 
   let adminMenuItems = [];
   let adminRoutes = [];
 
-  function fillSettingsForm() {
+  async function fillSettingsForm() {
+    settings = await requestSharedSettings();
     const form = $("#settings-form");
     for (const key of ["business", "owner", "address", "primary", "secondary", "email", "alternateEmail"]) {
       form.elements[key].value = settings[key] || "";
@@ -695,10 +698,20 @@
     });
   }
 
-  function showDashboard() {
+  async function showDashboard() {
+    $("#admin-auth-submit").disabled = true;
+    $("#admin-error").textContent = "";
+    try {
+      await fillSettingsForm();
+    } catch (error) {
+      console.error("Could not load shared admin settings.", error);
+      $("#admin-error").textContent = error.message;
+      return;
+    } finally {
+      $("#admin-auth-submit").disabled = false;
+    }
     login.hidden = true;
     dashboard.hidden = false;
-    fillSettingsForm();
   }
 
   function openAdminDialog() {
@@ -725,23 +738,30 @@
     if (!form.reportValidity()) return;
     const password = form.elements.password.value;
     const error = $("#admin-error");
+    const submit = $("#admin-auth-submit");
+    submit.disabled = true;
     try {
-      const passwordHash = await digest(password);
-      if (passwordConfigured()) {
-        const username = form.elements.username.value.trim();
-        if (username !== localStorage.getItem(KEYS.adminUsername) || passwordHash !== localStorage.getItem(KEYS.adminPassword)) {
-          error.textContent = t("passwordMismatch");
-          return;
-        }
-      } else {
-        localStorage.setItem(KEYS.adminUsername, form.elements.username.value.trim());
-        localStorage.setItem(KEYS.adminPassword, passwordHash);
+      const response = await fetch("/api/admin-session", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: form.elements.username.value.trim(),
+          password
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        error.textContent = result.error || t("passwordMismatch");
+        return;
       }
       form.reset();
-      showDashboard();
+      await showDashboard();
     } catch (failure) {
-      console.error("Admin login could not be completed.", failure);
-      error.textContent = t("secureContext");
+      console.error("Admin login request failed.", failure);
+      error.textContent = t("adminUnavailable");
+    } finally {
+      submit.disabled = false;
     }
   });
 
@@ -786,7 +806,7 @@
     $("[data-route-from]", $("#admin-routes").lastElementChild)?.focus();
   });
 
-  $("#settings-form").addEventListener("submit", (event) => {
+  $("#settings-form").addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
@@ -801,7 +821,7 @@
       window.alert(t("addBeforeSave"));
       return;
     }
-    settings = {
+    const nextSettings = {
       business: String(data.get("business")).trim(),
       owner: String(data.get("owner")).trim(),
       address: String(data.get("address")).trim(),
@@ -818,18 +838,46 @@
       })),
       routes: adminRoutes.map((route) => ({ from: route.from.trim(), to: route.to.trim() }))
     };
+    const saveButton = $(".save-settings", form);
+    saveButton.disabled = true;
     try {
-      localStorage.setItem(KEYS.settings, JSON.stringify(settings));
+      const response = await fetch("/api/settings", {
+        method: "PUT",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(nextSettings)
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || t("saveFailed"));
+      settings = normalizeSettings(result.settings);
       renderSettings();
       window.alert(t("saved"));
     } catch (error) {
-      console.error("Could not save S K Transport settings.", error);
-      window.alert(t("saveFailed"));
+      console.error("Could not save shared S K Transport settings.", error);
+      window.alert(error.message || t("saveFailed"));
+    } finally {
+      saveButton.disabled = false;
     }
   });
 
-  $("#admin-logout").addEventListener("click", () => {
+  $("#admin-logout").addEventListener("click", async () => {
+    try {
+      const response = await fetch("/api/admin-session", {
+        method: "DELETE",
+        credentials: "same-origin"
+      });
+      const result = await response.json();
+      if (!response.ok || result.authenticated !== false) throw new Error(result.error || "Server did not confirm logout.");
+    } catch (error) {
+      console.error("Could not end the admin session cleanly.", error);
+      window.alert(t("logoutFailed"));
+      return;
+    }
     dialog.close();
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) void refreshSharedSettings();
   });
 
   const menuButton = $(".menu-toggle");
@@ -852,6 +900,7 @@
   $("#year").textContent = new Date().getFullYear();
   renderSettings();
   applyLanguage();
+  void refreshSharedSettings();
   if (isAdminPage) {
     document.body.classList.add("admin-only");
     openAdminDialog();
