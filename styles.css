@@ -208,6 +208,13 @@
 .footer-bottom{min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:11px var(--pad);border-top:1px solid #ffffff17;color:#76817a;font-size:8px;letter-spacing:.06em}
 .footer-bottom .admin-trigger{color:#abb4ad}
 .footer-bottom .admin-trigger{margin-right:125px}
+.driver-connect{max-width:380px;margin-top:22px;padding:16px;border:1px solid #ffffff25;background:linear-gradient(135deg,#202d30,#172023)}
+.driver-connect>strong{color:var(--orange-light);font-size:9px;letter-spacing:.13em}
+.driver-connect p{margin:8px 0 13px;color:#aeb7b1;font-size:10px;line-height:1.7}
+.driver-connect-link{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:#ef8137;color:#11191c;font-size:10px;font-weight:700;transition:background .2s,transform .2s}
+.driver-connect-link:hover{background:#ffad57;transform:translateY(-1px)}
+.hindi .driver-connect>strong{letter-spacing:0}
+.hindi .driver-connect p,.hindi .driver-connect-link{font-family:"Hind","Noto Sans Devanagari",sans-serif;line-height:1.7}
 body.admin-only{min-height:100svh;background:var(--ink)}
 body.admin-only>.announcement,body.admin-only>.site-header,body.admin-only>main,body.admin-only>.site-footer,body.admin-only>.whatsapp-float{display:none!important}
 @media(max-width:1000px) and (min-width:701px){.site-header{height:82px}.menu-toggle{display:flex;width:39px;height:39px;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px solid #ffffff38;cursor:pointer}.menu-toggle span{height:1px;width:17px;background:var(--cream)}.main-nav{display:none;position:absolute;top:81px;left:0;right:0;padding:20px var(--pad);background:#151e21;border-top:1px solid #ffffff20;align-items:stretch;gap:0;flex-direction:column}.main-nav.open{display:flex}.main-nav .menu-items{align-items:stretch;flex-direction:column;gap:0}.main-nav .menu-items a,.main-nav>a{padding:13px 0;border-bottom:1px solid #ffffff16}.main-nav .nav-book{margin-top:12px;padding:14px 15px;border:0}}
