@@ -22,7 +22,8 @@
     </a>
     <div class="header-actions"><div class="language-switch" role="group" aria-label="Choose language" data-i18n-aria="languageGroup"><button type="button" class="language-option active" data-language="en" aria-pressed="true">EN</button><span></span><button type="button" class="language-option" data-language="hi" aria-pressed="false">हिंदी</button></div><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button></div>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#services" data-i18n="navFleet">Our fleet</a><a href="#capabilities" data-i18n="navCoverage">Services</a><a href="#about" data-i18n="navAbout">Why S K</a><a href="#contact" data-i18n="navContact">Contact</a>
+      <div class="menu-items" id="menu-items"></div>
+      <a class="admin-nav-link" href="admin.html" data-i18n="navAdmin">Admin login ↗</a>
       <a class="nav-book" href="#book"><span data-i18n="navBook">Book a vehicle</span><span>↗</span></a>
     </nav>
   </header>
@@ -91,17 +92,23 @@
 
     <section class="nationwide-strip" aria-label="Pan-India delivery"><span class="nationwide-icon" aria-hidden="true">↗</span><div><small data-i18n="nationwideEyebrow">DEOBAND TO DESTINATIONS ACROSS INDIA</small><h2 data-i18n="nationwideTitle">PAN-INDIA DELIVERY</h2></div><a href="#book"><span data-i18n="nationwideCta">PLAN A DELIVERY</span> ↗</a></section>
 
+    <section class="routes-section section-pad" id="routes">
+      <div class="section-heading"><div><div class="eyebrow"><span>04</span><i></i> <span data-i18n="routesEyebrow">SUGGESTED ROUTES</span></div><h2 data-i18n-html="routesTitle">ROUTES THAT<br><span>KEEP YOU MOVING.</span></h2></div><p data-i18n="routesIntro">Explore example routes and send us an enquiry. Route, vehicle availability, timing and price are confirmed individually.</p></div>
+      <div class="routes-grid" id="routes-grid"></div>
+      <p class="routes-disclaimer" data-i18n="routesDisclaimer">These are suggested route enquiries, not a live schedule. Contact us to confirm service for your dates and locations.</p>
+    </section>
+
     <section class="about" id="about">
       <div class="about-image">
         <div class="about-sun"></div><div class="about-road"></div>
         <svg class="about-truck" viewBox="0 0 560 300" aria-hidden="true"><path d="M42 60h300v166H42z" fill="#e9e4d8"/><path d="M342 122h90l77 72v32H342z" fill="#ed8a3c"/><path d="M365 138h58l45 46h-103z" fill="#33484c"/><path d="M42 214h467v20H42z" fill="#22292b"/><circle cx="151" cy="233" r="34" fill="#141b1d"/><circle cx="151" cy="233" r="17" fill="#99998e"/><circle cx="423" cy="233" r="34" fill="#141b1d"/><circle cx="423" cy="233" r="17" fill="#99998e"/><path d="M82 92h220v96H82z" fill="none" stroke="#aaa79e" stroke-width="2"/><text x="192" y="144" text-anchor="middle" fill="#20292b" font-size="25" font-weight="900" font-family="Arial">S K TRANSPORT</text><path d="M352 201h148" stroke="#f4eee0" stroke-width="5"/></svg>
         <div class="about-label"><span data-i18n="localKnowhow">LOCAL KNOW-HOW</span><b data-i18n-html="localArea">DEOBAND<br>AND BEYOND</b></div>
       </div>
-      <div class="about-copy"><div class="eyebrow"><span>04</span><i></i> <span data-i18n="aboutEyebrow">A NAME YOU CAN COUNT ON</span></div><h2 data-i18n-html="aboutTitle">WE KNOW THE<br>WAY <span>FORWARD.</span></h2><p data-i18n="aboutIntro">S K Transport is proudly based in Deoband. From everyday deliveries to the big moves, we bring dependable vehicles and a personal touch to every journey.</p><p data-i18n="aboutSub">Tell us what you need moved, where it's going and when. We'll take it from there.</p><div class="owner-line"><div class="owner-initial">SK</div><span><small data-i18n="localContact">YOUR LOCAL CONTACT</small><strong data-owner>Sushil Kumar</strong><small data-i18n="proprietor">Proprietor, S K Transport</small></span><div class="owner-star">✳</div></div></div>
+      <div class="about-copy"><div class="eyebrow"><span>05</span><i></i> <span data-i18n="aboutEyebrow">A NAME YOU CAN COUNT ON</span></div><h2 data-i18n-html="aboutTitle">WE KNOW THE<br>WAY <span>FORWARD.</span></h2><p data-i18n="aboutIntro">S K Transport is proudly based in Deoband. From everyday deliveries to the big moves, we bring dependable vehicles and a personal touch to every journey.</p><p data-i18n="aboutSub">Tell us what you need moved, where it's going and when. We'll take it from there.</p><div class="owner-line"><div class="owner-initial">SK</div><span><small data-i18n="localContact">YOUR LOCAL CONTACT</small><strong data-owner>Sushil Kumar</strong><small data-i18n="proprietor">Proprietor, S K Transport</small></span><div class="owner-star">✳</div></div></div>
     </section>
 
     <section class="booking section-pad" id="book">
-      <div class="booking-intro"><div class="eyebrow"><span>05</span><i></i> <span data-i18n="bookingEyebrow">LET'S GET YOU MOVING</span></div><h2 data-i18n-html="bookingTitle">YOUR NEXT MOVE<br>STARTS <span>RIGHT HERE.</span></h2><p data-i18n="bookingIntro">Share a few details and we'll get back to you. No commitment, just a conversation about getting it there.</p>
+      <div class="booking-intro"><div class="eyebrow"><span>06</span><i></i> <span data-i18n="bookingEyebrow">LET'S GET YOU MOVING</span></div><h2 data-i18n-html="bookingTitle">YOUR NEXT MOVE<br>STARTS <span>RIGHT HERE.</span></h2><p data-i18n="bookingIntro">Share a few details and we'll get back to you. No commitment, just a conversation about getting it there.</p>
         <div class="booking-contact"><div class="contact-symbol">↗</div><div><small data-i18n="preferCall">PREFER TO CALL?</small><a data-primary-phone href="tel:8445486229" data-primary-display>84454 86229</a><small data-i18n="phoneAway">We're just a phone call away.</small></div></div>
         <div class="booking-note"><span>✳</span><p data-i18n="smsNote">Your details open in your messaging app as an SMS draft. Review and tap send to share with S K Transport.</p></div>
       </div>
@@ -121,9 +128,21 @@
       </form>
     </section>
 
-    <section class="contact-strip" id="contact"><div class="contact-strip-copy"><div class="eyebrow"><span>06</span><i></i> <span data-i18n="contactEyebrow">HERE WHEN YOU NEED US</span></div><h2 data-i18n-html="contactTitle">GOOD TO GO?<br><span>LET'S TALK.</span></h2></div><div class="contact-details">    <div><small data-i18n="findUs">FIND US</small><strong data-address>Noopur near Sugar Mill Deoband,<br>Deoband, 247554</strong></div><div><small data-i18n="callUs">GIVE US A RING</small><a data-secondary-phone href="tel:7078862293" data-secondary-display>70788 62293</a><a data-primary-phone href="tel:8445486229" data-primary-display>84454 86229</a></div><div class="email-contact" id="email-contact" hidden><small data-i18n="emailUs">EMAIL US</small><a data-email-link href=""></a></div><a class="contact-arrow" href="#book" aria-label="Book a vehicle">↗</a></div></section>
+    <section class="contact-strip" id="contact"><div class="contact-strip-copy"><div class="eyebrow"><span>07</span><i></i> <span data-i18n="contactEyebrow">HERE WHEN YOU NEED US</span></div><h2 data-i18n-html="contactTitle">GOOD TO GO?<br><span>LET'S TALK.</span></h2></div><div class="contact-details">    <div><small data-i18n="findUs">FIND US</small><strong data-address>Noopur near Sugar Mill Deoband,<br>Deoband, 247554</strong></div><div><small data-i18n="callUs">GIVE US A RING</small><a data-secondary-phone href="tel:7078862293" data-secondary-display>70788 62293</a><a data-primary-phone href="tel:8445486229" data-primary-display>84454 86229</a></div><div class="email-contact" id="email-contact" hidden><small data-i18n="emailUs">EMAIL US</small><a data-email-link href=""></a></div><a class="contact-arrow" href="#book" aria-label="Book a vehicle">↗</a></div></section>
   </main>
-  <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 40"><path d="M3 8h25v20H3zM28 15h9l8 9v4H28z"/><path d="M34 18v6h10l-5-6z" class="window"/><circle cx="13" cy="31" r="5"/><circle cx="36" cy="31" r="5"/><path d="M8 17h14M8 22h9" class="stripe"/></svg></span><span class="brand-copy"><strong>S K <em>TRANSPORT</em></strong><small data-i18n="brandTag">DEOBAND · ALL INDIA SERVICE</small></span></a><span data-i18n="footerTag">EVERY LOAD. ON THE MOVE.</span><button class="admin-trigger" type="button"><span data-i18n="adminButton">ADMIN</span> ↗</button><span>© <span id="year"></span> S K TRANSPORT</span></footer>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand-column">
+        <a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 40"><path d="M3 8h25v20H3zM28 15h9l8 9v4H28z"/><path d="M34 18v6h10l-5-6z" class="window"/><circle cx="13" cy="31" r="5"/><circle cx="36" cy="31" r="5"/><path d="M8 17h14M8 22h9" class="stripe"/></svg></span><span class="brand-copy"><strong>S K <em>TRANSPORT</em></strong><small data-i18n="brandTag">DEOBAND · ALL INDIA SERVICE</small></span></a>
+        <p data-i18n="footerTag">EVERY LOAD. ON THE MOVE.</p>
+        <div class="footer-copyright">© <span id="year"></span> <span data-business>S K Transport</span>. <span data-i18n="rightsReserved">All rights reserved.</span></div>
+      </div>
+      <div class="footer-column"><h3 data-i18n="footerContact">CONTACT DETAILS</h3><a data-primary-phone href="tel:8445486229"><span data-i18n="callUs">CALL US</span><b data-primary-display>84454 86229</b></a><a data-secondary-phone href="tel:7078862293"><span data-i18n="alternateContact">ALTERNATE</span><b data-secondary-display>70788 62293</b></a><a id="footer-email" href="mailto:sainihimanshu27958@gmail.com" data-email-link><span data-i18n="emailUs">EMAIL</span><b data-footer-email-text>sainihimanshu27958@gmail.com</b></a><p class="footer-address"><span data-i18n="findUs">ADDRESS</span><b data-address>Noopur near Sugar Mill Deoband, Deoband, 247554</b></p></div>
+      <div class="footer-column"><h3 data-i18n="footerLoadDetails">LOAD DETAILS</h3><a href="#book" data-footer-service="0" data-i18n="serviceSmallLoad">Small load</a><a href="#book" data-footer-service="1" data-i18n="servicePartLoad">Part load</a><a href="#book" data-footer-service="2" data-i18n="serviceFullLoad">Full load</a><a href="#book" data-footer-service="3" data-i18n="serviceBigLoad">Big load</a><a href="#book" data-footer-service="4" data-i18n="serviceColdChain">Cold chain enquiry</a><a href="#book" data-footer-service="5" data-i18n="serviceExpress">Express delivery</a><a href="#book" data-footer-service="6" data-i18n="serviceWorkshop">Workshop &amp; industry goods</a></div>
+      <div class="footer-column"><h3 data-i18n="footerExplore">ABOUT &amp; ROUTES</h3><a href="#about" data-i18n="navAbout">About us</a><nav class="footer-menu-items" id="footer-menu-items" aria-label="Footer navigation"></nav><a href="#routes" data-i18n="navRoutes">Routes</a></div>
+    </div>
+    <div class="footer-bottom"><span data-i18n="footerServiceArea">Based in Deoband · Serving destinations across India</span><button class="admin-trigger" type="button"><span data-i18n="adminButton">ADMIN</span> ↗</button></div>
+  </footer>
 
   <dialog class="admin-dialog" id="admin-dialog" aria-labelledby="admin-title">
     <button class="dialog-close" type="button" aria-label="Close admin panel" data-i18n-aria="closeAdmin">×</button>
@@ -145,6 +164,10 @@
         <div class="form-row"><label data-i18n-label="primaryMobile">PRIMARY MOBILE<input name="primary" inputmode="tel" required maxlength="20"></label><label data-i18n-label="alternateMobile">ALTERNATE MOBILE<input name="secondary" inputmode="tel" required maxlength="20"></label></div>
         <h3 data-i18n="vehiclesHeading">VEHICLES</h3><div id="admin-vehicles"></div>
         <div class="add-vehicle-row"><input id="new-vehicle" placeholder="New vehicle name" data-i18n-placeholder="newVehiclePlaceholder" maxlength="40" aria-label="New vehicle name" data-i18n-aria="newVehicleAria"><button type="button" id="add-vehicle" data-i18n="addVehicle">+ ADD VEHICLE</button></div>
+        <h3 data-i18n="menuManagerTitle">MENU LINKS</h3><div id="admin-menu-items"></div>
+        <div class="admin-add-row"><button type="button" id="add-menu-item" data-i18n="addMenuItem">+ ADD MENU LINK</button></div>
+        <h3 data-i18n="routeManagerTitle">ROUTES</h3><div id="admin-routes"></div>
+        <div class="admin-add-row"><button type="button" id="add-route" data-i18n="addRoute">+ ADD ROUTE</button></div>
         <p class="admin-note" data-i18n="adminNote">Admin changes, including vehicle photos, are saved only in this browser and do not update the public site for other visitors.</p>
         <button class="button button-orange save-settings" type="submit"><span data-i18n="saveChanges">Save changes</span> <span>↗</span></button>
       </form>

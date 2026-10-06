@@ -1,11 +1,31 @@
 (() => {
   "use strict";
+  const isAdminPage = new URLSearchParams(window.location.search).get("admin") === "1";
 
   const KEYS = {
     settings: "sk-transport-settings-v1",
     adminPassword: "sk-transport-admin-password-v1",
     adminUsername: "sk-transport-admin-username-v1"
   };
+  const DEFAULT_MENU_ITEMS = [
+    { en: "Our fleet", hi: "हमारी गाड़ियाँ", href: "#services" },
+    { en: "Services", hi: "सेवाएँ", href: "#capabilities" },
+    { en: "Routes", hi: "रूट", href: "#routes" },
+    { en: "About us", hi: "हमारे बारे में", href: "#about" },
+    { en: "Contact", hi: "संपर्क", href: "#contact" }
+  ];
+  const DEFAULT_ROUTES = [
+    { from: "Deoband", to: "Delhi" },
+    { from: "Deoband", to: "Lucknow" },
+    { from: "Deoband", to: "Jaipur" },
+    { from: "Deoband", to: "Mumbai" },
+    { from: "Deoband", to: "Ahmedabad" },
+    { from: "Deoband", to: "Bengaluru" }
+  ];
+  const MENU_TARGETS = ["#home", "#services", "#capabilities", "#routes", "#about", "#book", "#contact"];
+  const MAX_MENU_ITEMS = 12;
+  const MAX_ROUTES = 30;
+  const SERVICE_OPTION_INDEX = [0, 3, 5, 6];
   const DEFAULTS = {
     business: "S K Transport",
     owner: "Sushil Kumar",
@@ -14,11 +34,13 @@
     secondary: "7078862293",
     email: "sainihimanshu27958@gmail.com",
     alternateEmail: "",
-    vehicles: ["Truck", "DCM", "Chhoti Gadi", "Badi Gadi", "Mini Truck", "Car", "Tractor Trali"]
+    vehicles: ["Truck", "DCM", "Chhoti Gadi", "Badi Gadi", "Mini Truck", "Car", "Tractor Trali"],
+    menuItems: DEFAULT_MENU_ITEMS,
+    routes: DEFAULT_ROUTES
   };
   const TEXT = {
     en: {
-      languageGroup: "Choose language", brandTag: "DEOBAND · ALL INDIA SERVICE", announce: "ALL-INDIA TRANSPORT SERVICE", availability: "CALL FOR AVAILABILITY", navFleet: "Our fleet", navCoverage: "Services", navAbout: "Why S K", navContact: "Contact", navBook: "Book a vehicle",
+      languageGroup: "Choose language", brandTag: "DEOBAND · ALL INDIA SERVICE", announce: "ALL-INDIA TRANSPORT SERVICE", availability: "CALL FOR AVAILABILITY", navFleet: "Our fleet", navCoverage: "Services", navRoutes: "Routes", navAbout: "About us", navContact: "Contact", navAdmin: "Admin login ↗", navBook: "Book a vehicle",
       heroEyebrow: "YOUR LOAD. OUR ROAD.", heroTitle: "EVERY LOAD.<br><span>ON THE MOVE.</span>", heroIntro: "From a single parcel to a full-scale haul, we transport your goods from Deoband to destinations across India.", heroCta: "Find your vehicle", quickCall: "QUICK CALL", heroProof: "Transport service across India.", heroProofSub: "Based in Deoband, ready to roll nationwide.", coverageNote: "BASED IN DEOBAND · SERVING ALL INDIA", heroStamp: "RELIABLE<br>BY NATURE", artCaption: "BUILT TO GET YOU THERE", scrollPrompt: "SCROLL TO EXPLORE <b>↓</b>",
       ticker: "<span>TRUCKS</span><b>✳</b><span>DCM</span><b>✳</b><span>MINI TRUCKS</span><b>✳</b><span>CARS</span><b>✳</b><span>TRACTOR TROLLY</span><b>✳</b><span>AND MORE</span><b>✳</b>".repeat(2),
       fleetEyebrow: "THE RIGHT RIDE FOR THE JOB", fleetTitle: "BIG LOAD. SMALL LOAD.<br><span>WE'VE GOT YOU.</span>", fleetIntro: "Choose the wheels that work for your move. Tell us what you need and we'll help line up the right vehicle.", fleetQuestion: "NOT SURE WHAT FITS?", fleetLink: "Tell us what you're moving",
@@ -33,7 +55,7 @@
       ,deliveryHeading: "Booking details are emailed automatically", deliveryTo: "Send to", emailActivationNote: "First use: confirm the activation email from FormSubmit before accepting live bookings.", smsDeliveryNote: "SMS is prepared for you to review and send.", emailLive: "EMAIL DELIVERY", whatsappLabel: "WhatsApp us", whatsappAria: "Chat with S K Transport on WhatsApp", emailSending: "Sending booking email…", emailSent: "Booking email sent successfully.", emailSetupRequired: "The email service needs activation. Check the activation email sent by FormSubmit to the primary email address.", emailSendFailed: "We couldn't send the booking email. Please try again or use WhatsApp/SMS below.", formSubmitError: "Booking email could not be sent.", whatsappBooking: "Send booking on WhatsApp", smsFallback: "Or prepare an SMS to"
     },
     hi: {
-      languageGroup: "भाषा चुनें", brandTag: "देवबंद · पूरे भारत में सेवा", announce: "पूरे भारत में ट्रांसपोर्ट सेवा", availability: "उपलब्धता के लिए कॉल करें", navFleet: "हमारी गाड़ियाँ", navCoverage: "सेवाएँ", navAbout: "एस के क्यों", navContact: "संपर्क", navBook: "गाड़ी बुक करें",
+      languageGroup: "भाषा चुनें", brandTag: "देवबंद · पूरे भारत में सेवा", announce: "पूरे भारत में ट्रांसपोर्ट सेवा", availability: "उपलब्धता के लिए कॉल करें", navFleet: "हमारी गाड़ियाँ", navCoverage: "सेवाएँ", navRoutes: "रूट", navAbout: "हमारे बारे में", navContact: "संपर्क", navAdmin: "एडमिन लॉगिन ↗", navBook: "गाड़ी बुक करें",
       heroEyebrow: "आपका सामान। हमारा रास्ता।", heroTitle: "हर सामान।<br><span>मंज़िल तक।</span>", heroIntro: "छोटे पार्सल से लेकर बड़े सामान तक—देवबंद से भारत के किसी भी शहर तक सामान पहुँचाने के लिए संपर्क करें।", heroCta: "अपनी गाड़ी चुनें", quickCall: "अभी कॉल करें", heroProof: "पूरे भारत में ट्रांसपोर्ट सेवा।", heroProofSub: "देवबंद से—देशभर में आपकी सेवा में।", coverageNote: "देवबंद से · पूरे भारत में सेवा", heroStamp: "भरोसेमंद<br>सेवा", artCaption: "आपकी मंज़िल तक साथ", scrollPrompt: "आगे देखने के लिए स्क्रॉल करें <b>↓</b>",
       ticker: "<span>ट्रक</span><b>✳</b><span>डीसीएम</span><b>✳</b><span>मिनी ट्रक</span><b>✳</b><span>कार</span><b>✳</b><span>ट्रैक्टर ट्रॉली</span><b>✳</b><span>और भी</span><b>✳</b>".repeat(2),
       fleetEyebrow: "हर काम के लिए सही गाड़ी", fleetTitle: "छोटा सामान हो या बड़ा।<br><span>हम हैं साथ।</span>", fleetIntro: "अपने सामान के लिए सही गाड़ी चुनें। बताइए आपको क्या चाहिए—हम सही गाड़ी चुनने में मदद करेंगे।", fleetQuestion: "कौन-सी गाड़ी सही रहेगी?", fleetLink: "क्या भेजना है, हमें बताएं",
@@ -50,23 +72,31 @@
   };
   const FEATURE_TEXT = {
     en: {
-      capEyebrow: "TRANSPORT FOR EVERY LOAD", capTitle: "SMALL LOAD.<br><span>BIG LOAD. EXPRESS.</span>", capIntro: "Small or large goods, express delivery, and workshop or industry items. Tell us what you need moved.", capCaveat: "Pan-India delivery and express timing are confirmed for each route. 24×7 enquiry support and GST billing are available; share billing details with us when booking.",
+      capEyebrow: "TRANSPORT FOR EVERY LOAD", capTitle: "SMALL LOAD.<br><span>BIG LOAD. EXPRESS.</span>", capIntro: "Small or large goods, express delivery, and workshop or industry items. Tell us what you need moved.", capCaveat: "Pan-India delivery and express timing are confirmed for each route. 24×7 enquiry support and GST billing are available; share billing details with us when booking. Cold-chain handling depends on suitable vehicle and route availability; please confirm before booking.",
       serviceTypes: ["Small load", "Big load", "Express delivery", "Workshop & industry goods"],
       serviceCopy: ["Mini trucks and suitable vehicles for smaller goods and local moves.", "Truck and larger vehicle options for bigger consignments.", "Time-sensitive delivery requests; timing confirmed for each route.", "Tools, machinery, parts and other workshop or industrial items."],
       serviceBadge: ["SMALL GOODS", "LARGE GOODS", "FAST DELIVERY", "BUSINESS & INDUSTRY"],
       serviceHighlights: ["24×7 enquiries", "GST billing", "Pan-India delivery"],
       nationwideEyebrow: "DEOBAND TO DESTINATIONS ACROSS INDIA", nationwideTitle: "PAN-INDIA DELIVERY", nationwideCta: "PLAN A DELIVERY",
-      serviceLabel: "TRANSPORT SERVICE", servicePlaceholder: "Choose a service type", serviceRequired: "Please choose a transport service.", serviceNames: ["Small load", "Big load", "Express delivery", "Workshop & industry goods", "Other — discuss with us"],
+      routesEyebrow: "SUGGESTED ROUTES", routesTitle: "ROUTES THAT<br><span>KEEP YOU MOVING.</span>", routesIntro: "Explore example routes and send us an enquiry. Route, vehicle availability, timing and price are confirmed individually.", routesDisclaimer: "These are suggested route enquiries, not a live schedule. Contact us to confirm service for your dates and locations.", routeFrom: "FROM", routeTo: "TO", routeEnquire: "ENQUIRE ABOUT THIS ROUTE", routeAvailability: "Route availability confirmed on enquiry.",
+      footerContact: "CONTACT DETAILS", alternateContact: "ALTERNATE", footerLoadDetails: "LOAD DETAILS", footerExplore: "ABOUT & ROUTES", rightsReserved: "All rights reserved.", footerServiceArea: "Based in Deoband · Serving destinations across India",
+      serviceSmallLoad: "Small load", servicePartLoad: "Part load", serviceFullLoad: "Full load", serviceBigLoad: "Big load", serviceColdChain: "Cold chain enquiry", serviceExpress: "Express delivery", serviceWorkshop: "Workshop & industry goods",
+      menuManagerTitle: "MENU LINKS", addMenuItem: "+ ADD MENU LINK", routeManagerTitle: "ROUTES", addRoute: "+ ADD ROUTE", menuLabelEnglish: "ENGLISH MENU LABEL", menuLabelHindi: "HINDI MENU LABEL", menuDestination: "LINK TO SECTION", routeFromPlaceholder: "Origin city / location", routeToPlaceholder: "Destination city / location", removeItem: "REMOVE",
+      serviceLabel: "TRANSPORT SERVICE", servicePlaceholder: "Choose a service type", serviceRequired: "Please choose a transport service.", serviceNames: ["Small load", "Part load", "Full load", "Big load", "Cold chain enquiry", "Express delivery", "Workshop & industry goods", "Other — discuss with us"],
       serviceTypeLabel: "Service", pickupPlaceholder: "City, state, PIN or landmark", dropPlaceholder: "City, state, PIN or landmark", photoHttpsOnly: "Use a secure image URL beginning with https://."
     },
     hi: {
-      capEyebrow: "हर सामान के लिए ट्रांसपोर्ट", capTitle: "छोटा लोड।<br><span>बड़ा। एक्सप्रेस।</span>", capIntro: "छोटा-बड़ा सामान, एक्सप्रेस डिलीवरी और वर्कशॉप या इंडस्ट्री की वस्तुएँ। अपनी ज़रूरत बताएं।", capCaveat: "पूरे भारत में डिलीवरी और एक्सप्रेस समय हर रास्ते के लिए पक्का होगा। 24×7 पूछताछ सहायता और GST बिलिंग उपलब्ध है; बुकिंग के समय बिलिंग की जानकारी दें।",
+      capEyebrow: "हर सामान के लिए ट्रांसपोर्ट", capTitle: "छोटा लोड।<br><span>बड़ा। एक्सप्रेस।</span>", capIntro: "छोटा-बड़ा सामान, एक्सप्रेस डिलीवरी और वर्कशॉप या इंडस्ट्री की वस्तुएँ। अपनी ज़रूरत बताएं।", capCaveat: "पूरे भारत में डिलीवरी और एक्सप्रेस समय हर रास्ते के लिए पक्का होगा। 24×7 पूछताछ सहायता और GST बिलिंग उपलब्ध है; बुकिंग के समय बिलिंग की जानकारी दें। कोल्ड चेन सेवा उपयुक्त गाड़ी और रूट मिलने पर निर्भर है—बुकिंग से पहले पुष्टि करें।",
       serviceTypes: ["छोटा लोड", "बड़ा लोड", "एक्सप्रेस डिलीवरी", "वर्कशॉप और इंडस्ट्री का सामान"],
       serviceCopy: ["छोटे सामान और लोकल मूव के लिए मिनी ट्रक व उपयुक्त गाड़ियाँ।", "बड़े सामान के लिए ट्रक और बड़ी गाड़ियों के विकल्प।", "जल्दी डिलीवरी की पूछताछ; हर रास्ते का समय अलग से पक्का होगा।", "औज़ार, मशीनरी, पुर्ज़े और अन्य वर्कशॉप या इंडस्ट्री का सामान।"],
       serviceBadge: ["छोटा सामान", "बड़ा सामान", "तेज़ डिलीवरी", "कारोबार और इंडस्ट्री"],
       serviceHighlights: ["24×7 पूछताछ", "GST बिलिंग", "पूरे भारत में डिलीवरी"],
       nationwideEyebrow: "देवबंद से पूरे भारत में", nationwideTitle: "पूरे भारत में डिलीवरी", nationwideCta: "डिलीवरी बुक करें",
-      serviceLabel: "ट्रांसपोर्ट सेवा", servicePlaceholder: "सेवा का प्रकार चुनें", serviceRequired: "कृपया ट्रांसपोर्ट सेवा चुनें।", serviceNames: ["छोटा लोड", "बड़ा लोड", "एक्सप्रेस डिलीवरी", "वर्कशॉप और इंडस्ट्री का सामान", "अन्य — हमसे बात करें"],
+      routesEyebrow: "सुझाए गए रूट", routesTitle: "आपके लिए<br><span>आसान रास्ते।</span>", routesIntro: "उदाहरण के रूट देखें और पूछताछ भेजें। रूट, गाड़ी, समय और किराये की पुष्टि अलग से होगी।", routesDisclaimer: "ये सुझाए गए रूट हैं, लाइव शेड्यूल नहीं। तारीख और जगह के लिए उपलब्धता पूछें।", routeFrom: "यहाँ से", routeTo: "यहाँ तक", routeEnquire: "इस रूट के लिए पूछें", routeAvailability: "रूट की उपलब्धता पूछताछ पर पक्की होगी।",
+      footerContact: "संपर्क जानकारी", alternateContact: "वैकल्पिक नंबर", footerLoadDetails: "सामान की सेवाएँ", footerExplore: "हमारे बारे में और रूट", rightsReserved: "सर्वाधिकार सुरक्षित।", footerServiceArea: "देवबंद से · पूरे भारत में सेवा",
+      serviceSmallLoad: "छोटा लोड", servicePartLoad: "पार्ट लोड", serviceFullLoad: "फुल लोड", serviceBigLoad: "बड़ा लोड", serviceColdChain: "कोल्ड चेन पूछताछ", serviceExpress: "एक्सप्रेस डिलीवरी", serviceWorkshop: "वर्कशॉप और इंडस्ट्री का सामान",
+      menuManagerTitle: "मेनू लिंक", addMenuItem: "+ मेनू लिंक जोड़ें", routeManagerTitle: "रूट", addRoute: "+ रूट जोड़ें", menuLabelEnglish: "अंग्रेज़ी मेनू नाम", menuLabelHindi: "हिंदी मेनू नाम", menuDestination: "किस सेक्शन से लिंक करें", routeFromPlaceholder: "शुरुआती शहर / जगह", routeToPlaceholder: "मंज़िल शहर / जगह", removeItem: "हटाएं",
+      serviceLabel: "ट्रांसपोर्ट सेवा", servicePlaceholder: "सेवा का प्रकार चुनें", serviceRequired: "कृपया ट्रांसपोर्ट सेवा चुनें।", serviceNames: ["छोटा लोड", "पार्ट लोड", "फुल लोड", "बड़ा लोड", "कोल्ड चेन पूछताछ", "एक्सप्रेस डिलीवरी", "वर्कशॉप और इंडस्ट्री का सामान", "अन्य — हमसे बात करें"],
       serviceTypeLabel: "सेवा", pickupPlaceholder: "शहर, राज्य, पिन कोड या पहचान", dropPlaceholder: "शहर, राज्य, पिन कोड या पहचान", photoHttpsOnly: "सुरक्षित तस्वीर का URL https:// से शुरू होना चाहिए।"
     }
   };
@@ -146,6 +176,8 @@
     renderCapabilities();
     renderServiceHighlights();
     renderServiceOptions();
+    renderMenuItems();
+    renderRoutes();
     if (!dashboard.hidden) translateAdminVehicles();
     if (!login.hidden) setLoginMode();
   }
@@ -171,6 +203,12 @@
       const vehicles = Array.isArray(saved.vehicles) && saved.vehicles.length
         ? saved.vehicles.filter((vehicle) => typeof vehicle === "string" && vehicle.trim()).slice(0, 20)
         : [...DEFAULTS.vehicles];
+      const menuItems = Array.isArray(saved.menuItems)
+        ? saved.menuItems.filter((item) => item && typeof item.en === "string" && typeof item.hi === "string" && MENU_TARGETS.includes(item.href)).slice(0, MAX_MENU_ITEMS)
+        : structuredClone(DEFAULT_MENU_ITEMS);
+      const routes = Array.isArray(saved.routes)
+        ? saved.routes.filter((route) => route && typeof route.from === "string" && typeof route.to === "string").slice(0, MAX_ROUTES)
+        : structuredClone(DEFAULT_ROUTES);
       return {
         ...DEFAULTS,
         ...saved,
@@ -178,6 +216,8 @@
         alternateEmail: saved.alternateEmail || "",
         secondary: saved.secondary || DEFAULTS.secondary,
         vehicles,
+        menuItems,
+        routes,
         vehiclePhotos: vehicles.map((_, index) =>
           typeof saved.vehiclePhotos?.[index] === "string" && validPhotoUrl(saved.vehiclePhotos[index])
             ? saved.vehiclePhotos[index]
@@ -213,7 +253,7 @@
     $$(".capability-card", grid).forEach((card) => {
       const choose = () => {
         const select = $("#booking-service");
-        select.selectedIndex = Number(card.dataset.serviceIndex) + 1;
+        select.selectedIndex = SERVICE_OPTION_INDEX[Number(card.dataset.serviceIndex)] + 1;
         $("#book").scrollIntoView({ behavior: "smooth" });
         select.focus({ preventScroll: true });
       };
@@ -232,6 +272,55 @@
     $("#service-highlights").innerHTML = t("serviceHighlights").map((label, index) =>
       `<div class="service-highlight"><span aria-hidden="true">${icons[index]}</span><strong>${safeText(label)}</strong></div>`
     ).join("");
+  }
+
+  function menuTargetLabel(href) {
+    const labels = {
+      "#home": language === "hi" ? "होम" : "Home",
+      "#services": language === "hi" ? "गाड़ियाँ" : "Fleet",
+      "#capabilities": language === "hi" ? "सेवाएँ" : "Services",
+      "#routes": language === "hi" ? "रूट" : "Routes",
+      "#about": language === "hi" ? "हमारे बारे में" : "About",
+      "#book": language === "hi" ? "बुकिंग" : "Booking",
+      "#contact": language === "hi" ? "संपर्क" : "Contact"
+    };
+    return labels[href] || href;
+  }
+
+  function renderMenuItems() {
+    const links = settings.menuItems.map((item) => {
+      const label = language === "hi" ? item.hi || item.en : item.en || item.hi;
+      return `<a href="${safeText(item.href)}">${safeText(label)}</a>`;
+    }).join("");
+    $("#menu-items").innerHTML = links;
+    $("#footer-menu-items").innerHTML = settings.menuItems
+      .filter((item) => item.href !== "#routes" && item.href !== "#about")
+      .map((item) => {
+        const label = language === "hi" ? item.hi || item.en : item.en || item.hi;
+        return `<a href="${safeText(item.href)}">${safeText(label)}</a>`;
+      }).join("");
+  }
+
+  function renderRoutes() {
+    $("#routes-grid").innerHTML = settings.routes.length
+      ? settings.routes.map((route, index) => `
+        <article class="route-card">
+          <div class="route-card-index">ROUTE ${String(index + 1).padStart(2, "0")}</div>
+          <div class="route-card-stops"><span><small>${safeText(t("routeFrom"))}</small><strong>${safeText(route.from)}</strong></span><i aria-hidden="true">→</i><span><small>${safeText(t("routeTo"))}</small><strong>${safeText(route.to)}</strong></span></div>
+          <p>${safeText(t("routeAvailability"))}</p>
+          <button type="button" data-enquire-route="${index}">${safeText(t("routeEnquire"))} <b>↗</b></button>
+        </article>`).join("")
+      : `<p class="routes-empty">${safeText(t("routesDisclaimer"))}</p>`;
+    $$("[data-enquire-route]", $("#routes-grid")).forEach((button) => {
+      button.addEventListener("click", () => {
+        const route = settings.routes[Number(button.dataset.enquireRoute)];
+        if (!route) return;
+        $("#booking-form").elements.pickup.value = route.from;
+        $("#booking-form").elements.drop.value = route.to;
+        $("#book").scrollIntoView({ behavior: "smooth" });
+        $("#booking-form").elements.name.focus({ preventScroll: true });
+      });
+    });
   }
 
   function renderServiceOptions() {
@@ -292,6 +381,7 @@
   }
 
   function renderSettings() {
+    $$("[data-business]").forEach((node) => { node.textContent = settings.business; });
     $$("[data-owner]").forEach((node) => { node.textContent = settings.owner; });
     $$("[data-address]").forEach((node) => {
       node.innerHTML = safeText(settings.address).replace(/, /g, "<br>");
@@ -310,11 +400,16 @@
       const emailLink = $("[data-email-link]", emailContact);
       emailLink.href = `mailto:${settings.email}`;
       emailLink.textContent = settings.email;
+      $("#footer-email").href = `mailto:${settings.email}`;
+      $("[data-footer-email-text]").textContent = settings.email;
     }
+    $("#footer-email").hidden = !settings.email;
     const activeEmails = [settings.email, settings.alternateEmail].filter(Boolean);
     $("[data-delivery-emails]").textContent = activeEmails.join(" · ");
     updateWhatsAppLink();
     renderFleet();
+    renderMenuItems();
+    renderRoutes();
   }
 
   function updateWhatsAppLink() {
@@ -487,12 +582,68 @@
     return [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
   }
 
+  let adminMenuItems = [];
+  let adminRoutes = [];
+
   function fillSettingsForm() {
     const form = $("#settings-form");
     for (const key of ["business", "owner", "address", "primary", "secondary", "email", "alternateEmail"]) {
       form.elements[key].value = settings[key] || "";
     }
     renderAdminVehicles();
+    adminMenuItems = structuredClone(settings.menuItems);
+    adminRoutes = structuredClone(settings.routes);
+    renderAdminMenuItems();
+    renderAdminRoutes();
+  }
+
+  function renderAdminMenuItems() {
+    $("#admin-menu-items").innerHTML = adminMenuItems.map((item, index) => `
+      <div class="admin-menu-editor" data-menu-row="${index}">
+        <label><span>${safeText(t("menuLabelEnglish"))}</span><input data-menu-en value="${safeText(item.en)}" maxlength="50" required></label>
+        <label><span>${safeText(t("menuLabelHindi"))}</span><input data-menu-hi value="${safeText(item.hi)}" maxlength="50" required></label>
+        <label><span>${safeText(t("menuDestination"))}</span><select data-menu-href required>${MENU_TARGETS.map((href) => `<option value="${href}" ${item.href === href ? "selected" : ""}>${safeText(menuTargetLabel(href))}</option>`).join("")}</select></label>
+        <button type="button" data-remove-menu="${index}">${safeText(t("removeItem"))}</button>
+      </div>`).join("");
+    $$("[data-menu-en], [data-menu-hi]", $("#admin-menu-items")).forEach((input) => {
+      input.addEventListener("input", () => {
+        const row = Number(input.closest("[data-menu-row]").dataset.menuRow);
+        adminMenuItems[row][input.hasAttribute("data-menu-en") ? "en" : "hi"] = input.value;
+      });
+    });
+    $$("[data-menu-href]", $("#admin-menu-items")).forEach((select) => {
+      select.addEventListener("change", () => {
+        adminMenuItems[Number(select.closest("[data-menu-row]").dataset.menuRow)].href = select.value;
+      });
+    });
+    $$("[data-remove-menu]", $("#admin-menu-items")).forEach((button) => {
+      button.addEventListener("click", () => {
+        adminMenuItems.splice(Number(button.dataset.removeMenu), 1);
+        renderAdminMenuItems();
+      });
+    });
+  }
+
+  function renderAdminRoutes() {
+    $("#admin-routes").innerHTML = adminRoutes.map((route, index) => `
+      <div class="admin-route-editor" data-admin-route="${index}">
+        <label><span>${safeText(t("routeFrom"))}</span><input data-route-from value="${safeText(route.from)}" placeholder="${safeText(t("routeFromPlaceholder"))}" maxlength="100" required></label>
+        <span class="admin-route-arrow" aria-hidden="true">→</span>
+        <label><span>${safeText(t("routeTo"))}</span><input data-route-to value="${safeText(route.to)}" placeholder="${safeText(t("routeToPlaceholder"))}" maxlength="100" required></label>
+        <button type="button" data-remove-route="${index}">${safeText(t("removeItem"))}</button>
+      </div>`).join("");
+    $$("[data-route-from], [data-route-to]", $("#admin-routes")).forEach((input) => {
+      input.addEventListener("input", () => {
+        const row = Number(input.closest("[data-admin-route]").dataset.adminRoute);
+        adminRoutes[row][input.hasAttribute("data-route-from") ? "from" : "to"] = input.value;
+      });
+    });
+    $$("[data-remove-route]", $("#admin-routes")).forEach((button) => {
+      button.addEventListener("click", () => {
+        adminRoutes.splice(Number(button.dataset.removeRoute), 1);
+        renderAdminRoutes();
+      });
+    });
   }
 
   function renderAdminVehicles() {
@@ -539,11 +690,18 @@
     fillSettingsForm();
   }
 
-  document.querySelector(".admin-trigger").addEventListener("click", () => {
+  function openAdminDialog() {
     setLoginMode();
     login.hidden = false;
     dashboard.hidden = true;
     dialog.showModal();
+  }
+
+  document.querySelector(".admin-trigger").addEventListener("click", openAdminDialog);
+  dialog.addEventListener("close", () => {
+    if (!isAdminPage) return;
+    if (window.parent !== window) window.parent.location.href = "index.html";
+    else window.location.href = "index.html";
   });
   $(".dialog-close").addEventListener("click", () => dialog.close());
   dialog.addEventListener("click", (event) => {
@@ -597,6 +755,26 @@
     renderAdminVehicles();
   });
 
+  $("#add-menu-item").addEventListener("click", () => {
+    if (adminMenuItems.length >= MAX_MENU_ITEMS) {
+      window.alert(language === "hi" ? "मेनू में अधिकतम 12 लिंक जोड़ सकते हैं।" : "You can add up to 12 menu links.");
+      return;
+    }
+    adminMenuItems.push({ en: "New link", hi: "नया लिंक", href: "#routes" });
+    renderAdminMenuItems();
+    $("[data-menu-en]", $("#admin-menu-items").lastElementChild)?.focus();
+  });
+
+  $("#add-route").addEventListener("click", () => {
+    if (adminRoutes.length >= MAX_ROUTES) {
+      window.alert(language === "hi" ? "अधिकतम 30 रूट जोड़ सकते हैं।" : "You can add up to 30 routes.");
+      return;
+    }
+    adminRoutes.push({ from: "", to: "" });
+    renderAdminRoutes();
+    $("[data-route-from]", $("#admin-routes").lastElementChild)?.focus();
+  });
+
   $("#settings-form").addEventListener("submit", (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -621,7 +799,13 @@
       email: String(data.get("email")).trim(),
       alternateEmail: String(data.get("alternateEmail")).trim(),
       vehicles,
-      vehiclePhotos: vehicleEntries.map((entry) => entry.photo)
+      vehiclePhotos: vehicleEntries.map((entry) => entry.photo),
+      menuItems: adminMenuItems.map((item) => ({
+        en: item.en.trim(),
+        hi: item.hi.trim(),
+        href: MENU_TARGETS.includes(item.href) ? item.href : "#home"
+      })),
+      routes: adminRoutes.map((route) => ({ from: route.from.trim(), to: route.to.trim() }))
     };
     try {
       localStorage.setItem(KEYS.settings, JSON.stringify(settings));
@@ -644,13 +828,23 @@
     menuButton.setAttribute("aria-expanded", String(open));
     menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
   });
-  $$(".main-nav a").forEach((link) => link.addEventListener("click", () => {
+  $(".main-nav").addEventListener("click", (event) => {
+    if (!event.target.closest("a")) return;
     $(".main-nav").classList.remove("open");
     menuButton.setAttribute("aria-expanded", "false");
-  }));
+  });
+  $(".footer-main").addEventListener("click", (event) => {
+    const link = event.target.closest("[data-footer-service]");
+    if (!link) return;
+    $("#booking-service").value = String(Number(link.dataset.footerService) + 1);
+  });
   $("#year").textContent = new Date().getFullYear();
   renderSettings();
   applyLanguage();
+  if (isAdminPage) {
+    document.body.classList.add("admin-only");
+    openAdminDialog();
+  }
 
   if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
