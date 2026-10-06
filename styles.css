@@ -138,3 +138,36 @@
 @media(max-width:700px){.coverage,.customers{padding-top:70px;padding-bottom:65px}.coverage .section-heading,.customers .section-heading{align-items:flex-start;flex-direction:column;gap:5px}.coverage .section-heading>p{margin:0}.coverage-metrics{gap:12px;padding:15px 7px}.coverage-metrics>div{align-items:flex-start;flex-direction:column;gap:2px}.coverage-metrics strong{font-size:24px}.coverage-metrics span{font-size:7px}.coverage-explorer{grid-template-columns:1fr}.coverage-map{min-height:390px}.india-map{height:290px;width:min(100%,280px)}.state-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:500px}.route-suggestions{grid-template-columns:1fr;gap:12px;margin-top:35px}.route-chips{grid-template-columns:1fr 1fr}.route-chip{gap:6px;padding:10px 8px}.route-chip>span:nth-child(2){font-size:13px}.customer-grid{grid-template-columns:1fr 1fr}.capability-grid{grid-template-columns:1fr 1fr}.capability-card{min-height:250px}.service-select-label select{font-size:11px}.route-field{padding:15px 10px}.route-field .form-row{grid-template-columns:1fr;gap:11px}.route-stop-title strong{font-size:8px}}
 @media(max-width:430px){.coverage-metrics{gap:8px}.coverage-metrics strong{font-size:21px}.coverage-metrics span{letter-spacing:.04em}.state-browser{padding:13px}.state-list{grid-template-columns:1fr}.route-chips{grid-template-columns:1fr}.route-chip>span:nth-child(2){font-size:16px}.customer-grid,.capability-grid{grid-template-columns:1fr}.capability-card{min-height:0}.customer-card{min-height:90px}.state-browser-head h3{font-size:24px}.route-field legend{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.india-land,.map-routes path,.map-pins circle{animation:none!important}.capability-card,.state-card,.route-chip{transition:none}}
+
+.capabilities{padding-top:78px;padding-bottom:70px;background:#e9e6dc;color:var(--ink)}
+.capability-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:27px}
+.capability-card{min-height:0;padding:17px 16px 15px;background:#fbfaf6}
+.capability-card:after{width:86px;height:86px;right:-42px;bottom:-46px}
+.capability-card-head{margin-bottom:13px}
+.capability-icon{width:34px;height:34px;font-size:18px}
+.capability-badge{font-size:7px;padding:5px 7px}
+.capability-card h3{font-size:22px;margin:9px 0 6px}
+.capability-card p{font-size:10px;line-height:1.55}
+.capability-link{margin-top:12px}
+.service-highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:15px}
+.service-highlight{display:flex;align-items:center;gap:10px;padding:11px 13px;background:#182225;color:#f2efe6}
+.service-highlight>span{display:grid;place-items:center;width:27px;height:27px;flex:none;background:#ef8137;color:#11191c;font-size:16px}
+.service-highlight strong{font-size:10px;letter-spacing:.04em}
+.capability-caveat{margin-top:11px;font-size:9px}
+.nationwide-strip{display:flex;align-items:center;gap:15px;padding:20px var(--pad);background:var(--orange);color:var(--ink)}
+.nationwide-icon{display:grid;place-items:center;width:40px;height:40px;border:1px solid #11191c55;border-radius:50%;font-size:19px}
+.nationwide-strip>div{flex:1}
+.nationwide-strip small{font-size:8px;font-weight:700;letter-spacing:.12em}
+.nationwide-strip h2{font:700 24px/1 var(--heading);margin:4px 0 0}
+.nationwide-strip>a{display:inline-flex;align-items:center;gap:13px;padding:11px 13px;border:1px solid #11191c77;font-size:9px;font-weight:700;letter-spacing:.08em}
+.nationwide-strip>a:hover{background:#ffffff35}
+.admin-vehicle-editor{padding:9px 0 11px;border-bottom:1px solid #17202320}
+.admin-vehicle-row{margin:0 0 8px}
+.admin-vehicle-photo-row{display:flex;align-items:center;gap:11px;padding-left:10px}
+.admin-vehicle-preview{width:74px;height:52px;flex:none;object-fit:cover;background:#d9d5c9;border:1px solid #17202322}
+.admin-photo-field{flex:1;min-width:0;margin:0!important}
+.admin-photo-field span{font-size:7px;font-weight:700;letter-spacing:.09em;color:#6c736e}
+.admin-photo-field input{font-size:10px}
+@media(max-width:900px){.capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.capabilities{padding-top:60px;padding-bottom:52px}.capability-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.capability-card{padding:14px 12px}.capability-card h3{font-size:20px}.service-highlights{gap:6px}.service-highlight{padding:9px 8px;gap:6px}.service-highlight strong{font-size:9px}.nationwide-strip{gap:10px;padding-top:16px;padding-bottom:16px}.nationwide-strip h2{font-size:21px}.nationwide-strip>a{gap:6px;padding:9px;font-size:8px}}
+@media(max-width:430px){.capability-grid{grid-template-columns:1fr 1fr}.capability-card{padding:12px 10px}.capability-card p{font-size:9px}.capability-badge{font-size:6px}.service-highlights{grid-template-columns:1fr}.service-highlight{padding:8px 10px}.nationwide-icon{width:33px;height:33px}.nationwide-strip small{font-size:7px}.nationwide-strip h2{font-size:18px}.nationwide-strip>a{font-size:7px;padding:8px 7px}}
