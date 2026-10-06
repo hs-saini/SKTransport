@@ -18,13 +18,13 @@
   };
   const TEXT = {
     en: {
-      languageGroup: "Choose language", brandTag: "DEOBAND · ALL INDIA SERVICE", announce: "ALL-INDIA TRANSPORT SERVICE", availability: "CALL FOR AVAILABILITY", navFleet: "Our fleet", navAbout: "Why S K", navContact: "Contact", navBook: "Book a vehicle",
+      languageGroup: "Choose language", brandTag: "DEOBAND · ALL INDIA SERVICE", announce: "ALL-INDIA TRANSPORT SERVICE", availability: "CALL FOR AVAILABILITY", navFleet: "Our fleet", navCoverage: "Coverage", navAbout: "Why S K", navContact: "Contact", navBook: "Book a vehicle",
       heroEyebrow: "YOUR LOAD. OUR ROAD.", heroTitle: "EVERY LOAD.<br><span>ON THE MOVE.</span>", heroIntro: "From a single parcel to a full-scale haul, we transport your goods from Deoband to destinations across India.", heroCta: "Find your vehicle", quickCall: "QUICK CALL", heroProof: "Transport service across India.", heroProofSub: "Based in Deoband, ready to roll nationwide.", coverageNote: "BASED IN DEOBAND · SERVING ALL INDIA", heroStamp: "RELIABLE<br>BY NATURE", artCaption: "BUILT TO GET YOU THERE", scrollPrompt: "SCROLL TO EXPLORE <b>↓</b>",
       ticker: "<span>TRUCKS</span><b>✳</b><span>DCM</span><b>✳</b><span>MINI TRUCKS</span><b>✳</b><span>CARS</span><b>✳</b><span>TRACTOR TROLLY</span><b>✳</b><span>AND MORE</span><b>✳</b>".repeat(2),
       fleetEyebrow: "THE RIGHT RIDE FOR THE JOB", fleetTitle: "BIG LOAD. SMALL LOAD.<br><span>WE'VE GOT YOU.</span>", fleetIntro: "Choose the wheels that work for your move. Tell us what you need and we'll help line up the right vehicle.", fleetQuestion: "NOT SURE WHAT FITS?", fleetLink: "Tell us what you're moving",
       localKnowhow: "ALL-INDIA SERVICE", localArea: "BASED IN DEOBAND<br>SERVING ALL INDIA", aboutEyebrow: "A NAME YOU CAN COUNT ON", aboutTitle: "WE KNOW THE<br>WAY <span>FORWARD.</span>", aboutIntro: "Based in Deoband, S K Transport arranges dependable vehicle service for moves to destinations across India. From everyday deliveries to big hauls, we bring a personal touch to every journey.", aboutSub: "Tell us what you need moved, where it's going and when. We'll help plan the journey from Deoband to your destination.", localContact: "YOUR TRANSPORT CONTACT", proprietor: "Proprietor, S K Transport",
       bookingEyebrow: "LET'S GET YOU MOVING", bookingTitle: "YOUR NEXT MOVE<br>STARTS <span>RIGHT HERE.</span>", bookingIntro: "Need transport from Deoband to anywhere in India? Share a few details and we'll get back to you. No commitment, just a conversation about your move.", preferCall: "PREFER TO CALL?", phoneAway: "We're just a phone call away.", smsNote: "Share your pickup and destination anywhere in India. Your details open as an SMS draft—review and tap send to contact S K Transport.",
-      bookingFormTitle: "BOOKING ENQUIRY", formCount: "NO. <b>01</b> / 01", chooseVehicle: "01 &nbsp; PICK YOUR VEHICLE <sup>*</sup>", nameLabel: "02 &nbsp; YOUR NAME <sup>*</sup>", phoneLabel: "03 &nbsp; PHONE NUMBER <sup>*</sup>", pickupLabel: "04 &nbsp; PICKUP LOCATION <sup>*</sup>", dropLabel: "05 &nbsp; DROP LOCATION <sup>*</sup>", dateLabel: "06 &nbsp; WHEN DO YOU NEED IT?", loadLabel: "07 &nbsp; WHAT ARE WE MOVING?", messageLabel: "08 &nbsp; ANYTHING ELSE WE SHOULD KNOW?",
+      bookingFormTitle: "BOOKING ENQUIRY", formCount: "NO. <b>01</b> / 01", chooseVehicle: "01 &nbsp; PICK YOUR VEHICLE <sup>*</sup>", nameLabel: "YOUR NAME <sup>*</sup>", phoneLabel: "PHONE NUMBER <sup>*</sup>", pickupLabel: "PICKUP LOCATION", dropLabel: "DROP LOCATION", dateLabel: "WHEN DO YOU NEED IT?", loadLabel: "WHAT ARE WE MOVING?", messageLabel: "ANYTHING ELSE WE SHOULD KNOW?",
       namePlaceholder: "e.g. Rahul Sharma", phonePlaceholder: "Your 10-digit number", pickupPlaceholder: "Where should we pick up?", dropPlaceholder: "Where is it going?", loadPlaceholder: "Furniture, goods, vehicle...", messagePlaceholder: "Add details about your load or trip...", submitBooking: "Prepare my booking", bookingConsent: "I agree to share these booking details with S K Transport by email. The email provider may retain submissions for up to 30 days.", formPrivacy: "Booking details are emailed to the business address above. SMS is not sent automatically; open a prepared SMS or WhatsApp message to contact us.",
       contactEyebrow: "HERE WHEN YOU NEED US", contactTitle: "GOOD TO GO?<br><span>LET'S TALK.</span>", findUs: "FIND US", callUs: "GIVE US A RING", emailUs: "EMAIL US", footerTag: "EVERY LOAD. ON THE MOVE.", adminButton: "ADMIN",
       privateAccess: "PRIVATE ACCESS", adminTitle: "TRANSPORT<br><span>CONTROL ROOM.</span>", adminUsername: "ADMIN USERNAME", createPassword: "CREATE PASSWORD", setPassword: "Set password & continue", adminWarning: "This static-site admin is browser-local, not secure for public production use. Use a private device; clearing browser data removes saved settings.", siteSettings: "SITE SETTINGS", dashboardTitle: "YOUR BUSINESS.<br><span>YOUR CALL.</span>", logout: "LOG OUT", businessDetails: "BUSINESS DETAILS", businessName: "BUSINESS NAME", addressLabel: "ADDRESS", primaryPhone: "PRIMARY PHONE", bookingPhone: "BOOKING PHONE", emailPrimary: "PRIMARY EMAIL (REQUIRED FOR BOOKINGS)", emailAlternate: "ALTERNATE EMAIL (OPTIONAL)", emailPrimaryPlaceholder: "Bookings go to this email", alternateEmailPlaceholder: "Booking email copy (optional)", phoneContacts: "PHONE CONTACTS", primaryMobile: "PRIMARY MOBILE", alternateMobile: "ALTERNATE MOBILE", emailOptional: "EMAIL (OPTIONAL)", emailPlaceholder: "Add an email when you have one", vehiclesHeading: "VEHICLES", newVehiclePlaceholder: "New vehicle name", newVehicleAria: "New vehicle name", addVehicle: "+ ADD VEHICLE", adminNote: "Settings are saved only in this browser; email edits here affect bookings from this device only. To change the email for all visitors, update the deployed site or connect a shared backend. FormSubmit also requires its activation email to be confirmed before bookings. SMS needs a separate provider account.", saveChanges: "Save changes", closeAdmin: "Close admin panel",
@@ -33,13 +33,13 @@
       ,deliveryHeading: "Booking details are emailed automatically", deliveryTo: "Send to", emailActivationNote: "First use: confirm the activation email from FormSubmit before accepting live bookings.", smsDeliveryNote: "SMS is prepared for you to review and send.", emailLive: "EMAIL DELIVERY", whatsappLabel: "WhatsApp us", whatsappAria: "Chat with S K Transport on WhatsApp", emailSending: "Sending booking email…", emailSent: "Booking email sent successfully.", emailSetupRequired: "The email service needs activation. Check the activation email sent by FormSubmit to the primary email address.", emailSendFailed: "We couldn't send the booking email. Please try again or use WhatsApp/SMS below.", formSubmitError: "Booking email could not be sent.", whatsappBooking: "Send booking on WhatsApp", smsFallback: "Or prepare an SMS to"
     },
     hi: {
-      languageGroup: "भाषा चुनें", brandTag: "देवबंद · पूरे भारत में सेवा", announce: "पूरे भारत में ट्रांसपोर्ट सेवा", availability: "उपलब्धता के लिए कॉल करें", navFleet: "हमारी गाड़ियाँ", navAbout: "एस के क्यों", navContact: "संपर्क", navBook: "गाड़ी बुक करें",
+      languageGroup: "भाषा चुनें", brandTag: "देवबंद · पूरे भारत में सेवा", announce: "पूरे भारत में ट्रांसपोर्ट सेवा", availability: "उपलब्धता के लिए कॉल करें", navFleet: "हमारी गाड़ियाँ", navCoverage: "सेवा क्षेत्र", navAbout: "एस के क्यों", navContact: "संपर्क", navBook: "गाड़ी बुक करें",
       heroEyebrow: "आपका सामान। हमारा रास्ता।", heroTitle: "हर सामान।<br><span>मंज़िल तक।</span>", heroIntro: "छोटे पार्सल से लेकर बड़े सामान तक—देवबंद से भारत के किसी भी शहर तक सामान पहुँचाने के लिए संपर्क करें।", heroCta: "अपनी गाड़ी चुनें", quickCall: "अभी कॉल करें", heroProof: "पूरे भारत में ट्रांसपोर्ट सेवा।", heroProofSub: "देवबंद से—देशभर में आपकी सेवा में।", coverageNote: "देवबंद से · पूरे भारत में सेवा", heroStamp: "भरोसेमंद<br>सेवा", artCaption: "आपकी मंज़िल तक साथ", scrollPrompt: "आगे देखने के लिए स्क्रॉल करें <b>↓</b>",
       ticker: "<span>ट्रक</span><b>✳</b><span>डीसीएम</span><b>✳</b><span>मिनी ट्रक</span><b>✳</b><span>कार</span><b>✳</b><span>ट्रैक्टर ट्रॉली</span><b>✳</b><span>और भी</span><b>✳</b>".repeat(2),
       fleetEyebrow: "हर काम के लिए सही गाड़ी", fleetTitle: "छोटा सामान हो या बड़ा।<br><span>हम हैं साथ।</span>", fleetIntro: "अपने सामान के लिए सही गाड़ी चुनें। बताइए आपको क्या चाहिए—हम सही गाड़ी चुनने में मदद करेंगे।", fleetQuestion: "कौन-सी गाड़ी सही रहेगी?", fleetLink: "क्या भेजना है, हमें बताएं",
       localKnowhow: "पूरे भारत में सेवा", localArea: "देवबंद से<br>देशभर में सेवा", aboutEyebrow: "भरोसे का नाम", aboutTitle: "आपकी राह के<br><span>हमसफ़र।</span>", aboutIntro: "एस के ट्रांसपोर्ट देवबंद से पूरे भारत में सामान पहुँचाने के लिए भरोसेमंद गाड़ी सेवा उपलब्ध कराता है। रोज़मर्रा की डिलीवरी हो या बड़ा सामान—हर सफ़र में भरोसेमंद सेवा और अपनापन।", aboutSub: "क्या सामान कहाँ से कहाँ पहुँचाना है और कब—हमें बताइए। देवबंद से आपकी मंज़िल तक सफ़र की जानकारी के लिए संपर्क करें।", localContact: "आपका ट्रांसपोर्ट संपर्क", proprietor: "मालिक, एस के ट्रांसपोर्ट",
       bookingEyebrow: "चलिए, आपकी बुकिंग करें", bookingTitle: "आपकी अगली बुकिंग<br><span>यहाँ से शुरू।</span>", bookingIntro: "देवबंद से भारत के किसी भी शहर तक सामान भेजना है? जानकारी भरें, हम आपसे संपर्क करेंगे। कोई बाध्यता नहीं—बस आपकी ज़रूरत समझने के लिए एक बातचीत।", preferCall: "सीधे बात करना चाहेंगे?", phoneAway: "हम बस एक कॉल दूर हैं।", smsNote: "भारत में कहीं से भी सामान कहाँ लेना और पहुँचाना है, बताएं। आपकी जानकारी SMS में खुलेगी—जाँचकर S K Transport को भेजें।",
-      bookingFormTitle: "बुकिंग की जानकारी", formCount: "नंबर <b>01</b> / 01", chooseVehicle: "01 &nbsp; अपनी गाड़ी चुनें <sup>*</sup>", nameLabel: "02 &nbsp; आपका नाम <sup>*</sup>", phoneLabel: "03 &nbsp; आपका मोबाइल नंबर <sup>*</sup>", pickupLabel: "04 &nbsp; सामान कहाँ से लेना है? <sup>*</sup>", dropLabel: "05 &nbsp; सामान कहाँ पहुँचाना है? <sup>*</sup>", dateLabel: "06 &nbsp; गाड़ी कब चाहिए?", loadLabel: "07 &nbsp; क्या सामान ले जाना है?", messageLabel: "08 &nbsp; कोई और जानकारी?",
+      bookingFormTitle: "बुकिंग की जानकारी", formCount: "नंबर <b>01</b> / 01", chooseVehicle: "01 &nbsp; अपनी गाड़ी चुनें <sup>*</sup>", nameLabel: "आपका नाम <sup>*</sup>", phoneLabel: "आपका मोबाइल नंबर <sup>*</sup>", pickupLabel: "सामान कहाँ से लेना है?", dropLabel: "सामान कहाँ पहुँचाना है?", dateLabel: "गाड़ी कब चाहिए?", loadLabel: "क्या सामान ले जाना है?", messageLabel: "कोई और जानकारी?",
       namePlaceholder: "जैसे: राहुल शर्मा", phonePlaceholder: "10 अंकों का मोबाइल नंबर", pickupPlaceholder: "सामान कहाँ से लेना है?", dropPlaceholder: "सामान कहाँ पहुँचाना है?", loadPlaceholder: "फर्नीचर, सामान, गाड़ी...", messagePlaceholder: "सामान या रास्ते की जानकारी लिखें...", submitBooking: "बुकिंग की जानकारी तैयार करें", bookingConsent: "मैं बुकिंग की यह जानकारी ईमेल से S K Transport को भेजने के लिए सहमत हूँ। ईमेल सेवा इस जानकारी को 30 दिनों तक रख सकती है।", formPrivacy: "बुकिंग की जानकारी ऊपर दिए कारोबार के ईमेल पर भेजी जाएगी। SMS अपने आप नहीं जाता—तैयार SMS या WhatsApp संदेश खोलकर भेजें।",
       contactEyebrow: "ज़रूरत पड़ने पर हम साथ हैं", contactTitle: "तैयार हैं?<br><span>बात करें।</span>", findUs: "हमारा पता", callUs: "हमें कॉल करें", emailUs: "ईमेल करें", footerTag: "हर सामान। मंज़िल तक।", adminButton: "एडमिन",
       privateAccess: "निजी प्रवेश", adminTitle: "ट्रांसपोर्ट<br><span>कंट्रोल पैनल।</span>", adminUsername: "एडमिन यूज़रनेम", createPassword: "पासवर्ड बनाएं", setPassword: "पासवर्ड बनाएं और आगे बढ़ें", adminWarning: "यह एडमिन पैनल इसी ब्राउज़र में काम करता है; सार्वजनिक वेबसाइट के लिए सुरक्षित लॉगिन नहीं है। निजी डिवाइस का उपयोग करें। ब्राउज़र डेटा हटाने पर सेटिंग मिट सकती है।", siteSettings: "वेबसाइट सेटिंग", dashboardTitle: "आपका कारोबार।<br><span>आपके फैसले।</span>", logout: "लॉग आउट", businessDetails: "कारोबार की जानकारी", businessName: "कारोबार का नाम", addressLabel: "पता", primaryPhone: "मुख्य फ़ोन नंबर", bookingPhone: "वैकल्पिक फ़ोन नंबर", emailPrimary: "मुख्य ईमेल (बुकिंग के लिए ज़रूरी)", emailAlternate: "वैकल्पिक ईमेल (ज़रूरी नहीं)", emailPrimaryPlaceholder: "बुकिंग इस ईमेल पर आएगी", alternateEmailPlaceholder: "बुकिंग ईमेल की कॉपी (ज़रूरी नहीं)", phoneContacts: "फ़ोन संपर्क", primaryMobile: "मुख्य मोबाइल नंबर", alternateMobile: "वैकल्पिक मोबाइल नंबर", emailOptional: "ईमेल (वैकल्पिक)", emailPlaceholder: "ईमेल होने पर यहाँ लिखें", vehiclesHeading: "गाड़ियाँ", newVehiclePlaceholder: "नई गाड़ी का नाम", newVehicleAria: "नई गाड़ी का नाम", addVehicle: "+ गाड़ी जोड़ें", adminNote: "सेटिंग सिर्फ़ इसी ब्राउज़र में सेव होंगी; यहाँ बदला ईमेल इसी डिवाइस की बुकिंग के लिए लागू होगा। सभी लोगों के लिए ईमेल बदलने हेतु डिप्लॉय की गई वेबसाइट बदलें या साझा बैकएंड जोड़ें। FormSubmit के एक्टिवेशन ईमेल की पुष्टि भी ज़रूरी है। SMS के लिए अलग सेवा खाता चाहिए।", saveChanges: "बदलाव सेव करें", closeAdmin: "एडमिन पैनल बंद करें",
@@ -48,6 +48,85 @@
       deliveryHeading: "बुकिंग की जानकारी ईमेल पर अपने आप भेजी जाएगी", deliveryTo: "ईमेल भेजें", emailActivationNote: "पहली बार: बुकिंग शुरू करने से पहले FormSubmit का एक्टिवेशन ईमेल कन्फ़र्म करें।", smsDeliveryNote: "SMS जाँचकर भेजने के लिए तैयार होगा।", emailLive: "ईमेल सेवा", whatsappLabel: "WhatsApp करें", whatsappAria: "S K Transport को WhatsApp संदेश भेजें", emailSending: "बुकिंग ईमेल भेज रहे हैं…", emailSent: "बुकिंग ईमेल सफलतापूर्वक भेज दिया गया।", emailSetupRequired: "ईमेल सेवा को सक्रिय करना होगा। FormSubmit द्वारा मुख्य ईमेल पर भेजे गए एक्टिवेशन ईमेल की पुष्टि करें।", emailSendFailed: "बुकिंग ईमेल नहीं भेज पाए। दोबारा कोशिश करें या नीचे WhatsApp/SMS का उपयोग करें।", formSubmitError: "बुकिंग ईमेल नहीं भेजा जा सका।", whatsappBooking: "बुकिंग WhatsApp पर भेजें", smsFallback: "या SMS तैयार करें"
     }
   };
+  const FEATURE_TEXT = {
+    en: {
+      capEyebrow: "TRANSPORT THAT FITS YOUR LOAD", capTitle: "ONE PART LOAD.<br><span>ONE BIG MOVE.</span>", capIntro: "Choose the kind of transport you need. We’ll confirm the vehicle, route, availability and price with you before booking.", capCaveat: "Special handling, express timelines, refrigeration, permits, insurance, tracking and billing options depend on the route and available vehicle. Please confirm these with us before booking.", mapTitle: "Illustration of transport coverage across India",
+      serviceTypes: ["Full truck load", "Part load", "Express enquiry", "Intercity & interstate", "Car & vehicle transfer", "Agriculture & equipment"],
+      serviceCopy: ["A dedicated vehicle for your shipment. Tell us the load size and destination.", "Ask about sharing suitable vehicle space for smaller shipments.", "Need a time-sensitive trip? Share your requested date and we’ll confirm what is possible.", "Plan a move between cities or states across India.", "Enquire about moving a car or other vehicle between locations.", "Ask about tractor trolley, machinery and other equipment transport."],
+      serviceBadge: ["DEDICATED VEHICLE", "ASK AVAILABILITY", "DATE CONFIRMATION", "PAN-INDIA ENQUIRY", "VEHICLE TRANSFER", "LOAD CHECK REQUIRED"],
+      coverageEyebrow: "FROM DEOBAND TO DESTINATIONS ACROSS INDIA", coverageTitle: "ONE COUNTRY.<br><span>MORE WAYS TO MOVE.</span>", coverageIntro: "Explore states, union territories and key cities. Share your exact pickup and drop-off in the enquiry; each trip is confirmed individually.", statesCount: "STATES", utsCount: "UNION TERRITORIES", countryCount: "COUNTRY · PAN INDIA", networkMap: "THE INDIA NETWORK", mapLegend: "Service enquiries welcome nationwide", availabilityLegend: "Route and vehicle availability confirmed per enquiry", coverageDirectory: "COVERAGE DIRECTORY", findState: "Find a state or city", regions: "REGIONS", coverageSearch: "Search state, territory or city...", allRegions: "ALL REGIONS", directoryDisclaimer: "City names are examples of key hubs, not an exhaustive list. Ask us to confirm your exact pickup, drop-off and service availability.", routeIdeas: "ROUTE IDEAS", routeHeading: "Where are you headed?", routeDisclaimer: "Suggested city pairs only. Ask us to confirm each route and quote.", routeArrow: "TO", noResults: "No matching states or cities. Try another search.", cityLabel: "Key cities", bookThisRoute: "ENQUIRE ABOUT THIS ROUTE", coverageCount: "36 regions listed",
+      customerEyebrow: "MOVING WHAT MATTERS TO YOU", customerTitle: "BUSINESS OR HOME.<br><span>LET'S GET IT THERE.</span>", customerIntro: "From one-time personal moves to recurring business shipments, tell us about your goods and we’ll discuss a suitable transport option.", customerTypes: ["Homes & families", "Retail & wholesale", "Farms & produce", "Builders & contractors", "Workshops & manufacturers", "Vehicle owners"], customerCopy: ["Household goods, furniture and personal belongings.", "Stock, supplies and goods between shops, warehouses and markets.", "Agricultural inputs, produce and equipment—vehicle suitability confirmed per load.", "Construction materials and equipment; share dimensions and weight for a check.", "Machinery, components and business consignments.", "Ask about suitable vehicle transfer options and route availability."],
+      serviceLabel: "TRANSPORT SERVICE", servicePlaceholder: "Choose a service type", serviceRequired: "Please choose a transport service.", serviceNames: ["Full truck load", "Part load", "Express enquiry", "Intercity / interstate", "Car / vehicle transfer", "Agriculture / equipment", "Other — discuss with us"],
+      routeFormTitle: "PICKUP & DESTINATION", originStateLabel: "PICKUP STATE / UNION TERRITORY", originStatePlaceholder: "Choose pickup state", originCityLabel: "PICKUP CITY", originCityPlaceholder: "Type or choose a pickup city", originAreaLabel: "PICKUP AREA / LANDMARK", originAreaPlaceholder: "Area, PIN code or landmark (optional)", destinationStateLabel: "DESTINATION STATE / UNION TERRITORY", destinationStatePlaceholder: "Choose destination state", destinationCityLabel: "DESTINATION CITY", destinationCityPlaceholder: "Type or choose a destination city", destinationAreaLabel: "DESTINATION AREA / LANDMARK", destinationAreaPlaceholder: "Area, PIN code or landmark (optional)", nameLabel: "YOUR NAME", phoneLabel: "YOUR PHONE NUMBER", routeLabel: "Route", serviceTypeLabel: "Service",
+      lookupRoutes: "Find routes", getRoute: "Enquire about this route", allIndiaBadge: "28 STATES · 8 UNION TERRITORIES", fullCoverage: "One route enquiry. Any state or union territory.", permitDisclaimer: "Listing a region does not guarantee a truck is available on every route. We confirm trip feasibility, timing, vehicle and price with you.",
+      stateCities: "Key cities", stateKind: ["STATE", "UNION TERRITORY"], noExactRoute: "Share the route in the booking form and we’ll check availability.",
+      etaNotGuaranteed: "Trip time is confirmed after we review your route and vehicle availability."
+    },
+    hi: {
+      capEyebrow: "आपके सामान के अनुसार ट्रांसपोर्ट", capTitle: "थोड़ा सामान।<br><span>या पूरी गाड़ी।</span>", capIntro: "अपनी ज़रूरत के अनुसार सेवा चुनें। बुकिंग से पहले गाड़ी, रास्ता, उपलब्धता और किराया हमसे पक्का करें।", capCaveat: "विशेष देखभाल, जल्दी डिलीवरी, रेफ्रिजरेशन, परमिट, बीमा, ट्रैकिंग और बिलिंग की सुविधा रास्ते व उपलब्ध गाड़ी पर निर्भर है। बुकिंग से पहले हमसे पुष्टि करें।", mapTitle: "भारत में ट्रांसपोर्ट सेवा का चित्र",
+      serviceTypes: ["पूरा ट्रक", "पार्ट लोड", "जल्दी डिलीवरी पूछताछ", "शहरों/राज्यों के बीच", "कार/गाड़ी भेजना", "खेती/मशीनरी का सामान"],
+      serviceCopy: ["आपके सामान के लिए पूरी गाड़ी। सामान और मंज़िल बताएं।", "कम सामान के लिए जगह साझा करने की उपलब्धता पूछें।", "जल्दी पहुँचाना है? तारीख बताएं, हम संभव समय की पुष्टि करेंगे।", "भारत के शहरों या राज्यों के बीच सामान भेजें।", "कार या अन्य गाड़ी एक जगह से दूसरी जगह भेजने के लिए पूछें।", "ट्रैक्टर ट्रॉली, मशीनरी और उपकरण भेजने के लिए पूछें।"],
+      serviceBadge: ["पूरी गाड़ी", "उपलब्धता पूछें", "तारीख की पुष्टि", "पूरे भारत में पूछताछ", "गाड़ी भेजें", "सामान की जाँच ज़रूरी"],
+      coverageEyebrow: "देवबंद से भारत के शहरों तक", coverageTitle: "एक देश।<br><span>कई मंज़िलें।</span>", coverageIntro: "राज्य, केंद्र शासित प्रदेश और प्रमुख शहर देखें। बुकिंग में सही जगह लिखें; हर यात्रा की अलग से पुष्टि होगी।", statesCount: "राज्य", utsCount: "केंद्र शासित प्रदेश", countryCount: "देश · पूरे भारत में", networkMap: "भारत में सेवा की जानकारी", mapLegend: "पूरे भारत से पूछताछ आमंत्रित है", availabilityLegend: "हर रास्ते और गाड़ी की उपलब्धता अलग से पक्की होगी", coverageDirectory: "सेवा क्षेत्र सूची", findState: "राज्य या शहर खोजें", regions: "क्षेत्र", coverageSearch: "राज्य, केंद्र शासित प्रदेश या शहर खोजें...", allRegions: "सभी क्षेत्र", directoryDisclaimer: "शहरों के नाम कुछ प्रमुख स्थानों के उदाहरण हैं, पूरी सूची नहीं। अपने पिकअप, मंज़िल और गाड़ी की उपलब्धता पूछें।", routeIdeas: "रास्ते के सुझाव", routeHeading: "कहाँ जाना है?", routeDisclaimer: "ये सिर्फ़ सुझाए गए शहर हैं। रास्ते और किराये की पुष्टि हमसे करें।", routeArrow: "से", noResults: "इस नाम का राज्य या शहर नहीं मिला। दूसरा नाम खोजें।", cityLabel: "प्रमुख शहर", bookThisRoute: "इस रास्ते के लिए पूछें", coverageCount: "36 क्षेत्र शामिल",
+      customerEyebrow: "आपका सामान, हमारी मंज़िल", customerTitle: "घर हो या कारोबार।<br><span>सामान पहुँचाएँ।</span>", customerIntro: "घर का सामान हो या कारोबार की नियमित सप्लाई—हमें जानकारी दें, हम सही ट्रांसपोर्ट विकल्प पर बात करेंगे।", customerTypes: ["घर-परिवार", "दुकान और थोक कारोबारी", "किसान और कृषि सामान", "निर्माण और ठेकेदार", "वर्कशॉप और निर्माता", "गाड़ी के मालिक"], customerCopy: ["घर का सामान, फर्नीचर और निजी वस्तुएँ।", "दुकान, गोदाम और बाज़ार के बीच स्टॉक और सामान।", "खेती का सामान, उपज और उपकरण—गाड़ी की उपयुक्तता जाँची जाएगी।", "निर्माण सामग्री और उपकरण; वजन और आकार बताएं।", "मशीनरी, पुर्ज़े और कारोबार का सामान।", "गाड़ी भेजने के विकल्प और रास्ते की उपलब्धता पूछें।"],
+      serviceLabel: "ट्रांसपोर्ट सेवा", servicePlaceholder: "सेवा का प्रकार चुनें", serviceRequired: "कृपया ट्रांसपोर्ट सेवा चुनें।", serviceNames: ["पूरा ट्रक", "पार्ट लोड", "जल्दी डिलीवरी पूछताछ", "शहर / राज्य के बीच", "कार / गाड़ी भेजना", "खेती / उपकरण", "अन्य — हमसे बात करें"],
+      routeFormTitle: "पिकअप और मंज़िल", originStateLabel: "पिकअप का राज्य / केंद्र शासित प्रदेश", originStatePlaceholder: "पिकअप राज्य चुनें", originCityLabel: "पिकअप का शहर", originCityPlaceholder: "पिकअप शहर लिखें या चुनें", originAreaLabel: "पिकअप क्षेत्र / पहचान", originAreaPlaceholder: "इलाका, पिन कोड या पहचान (ज़रूरी नहीं)", destinationStateLabel: "मंज़िल का राज्य / केंद्र शासित प्रदेश", destinationStatePlaceholder: "मंज़िल का राज्य चुनें", destinationCityLabel: "मंज़िल का शहर", destinationCityPlaceholder: "मंज़िल का शहर लिखें या चुनें", destinationAreaLabel: "मंज़िल का क्षेत्र / पहचान", destinationAreaPlaceholder: "इलाका, पिन कोड या पहचान (ज़रूरी नहीं)", nameLabel: "आपका नाम", phoneLabel: "आपका मोबाइल नंबर", routeLabel: "रास्ता", serviceTypeLabel: "सेवा",
+      lookupRoutes: "रास्ते खोजें", getRoute: "इस रास्ते के लिए पूछें", allIndiaBadge: "28 राज्य · 8 केंद्र शासित प्रदेश", fullCoverage: "एक पूछताछ। कोई भी राज्य या केंद्र शासित प्रदेश।", permitDisclaimer: "क्षेत्र सूची में होने का अर्थ यह नहीं कि हर रास्ते पर गाड़ी उपलब्ध है। यात्रा, समय, गाड़ी और किराया हम पुष्टि करके बताएंगे।",
+      stateCities: "प्रमुख शहर", stateKind: ["राज्य", "केंद्र शासित प्रदेश"], noExactRoute: "बुकिंग फ़ॉर्म में रास्ता बताएं, हम उपलब्धता की जाँच करेंगे।",
+      etaNotGuaranteed: "यात्रा का समय रास्ते और गाड़ी की उपलब्धता जाँचने के बाद बताया जाएगा।"
+    }
+  };
+
+  const INDIA_REGIONS = [
+    {en:"Andhra Pradesh",hi:"आंध्र प्रदेश",kind:"state",cities:["Visakhapatnam","Vijayawada","Guntur","Tirupati"]},
+    {en:"Arunachal Pradesh",hi:"अरुणाचल प्रदेश",kind:"state",cities:["Itanagar","Naharlagun","Pasighat","Tawang"]},
+    {en:"Assam",hi:"असम",kind:"state",cities:["Guwahati","Dibrugarh","Silchar","Jorhat"]},
+    {en:"Bihar",hi:"बिहार",kind:"state",cities:["Patna","Gaya","Muzaffarpur","Bhagalpur"]},
+    {en:"Chhattisgarh",hi:"छत्तीसगढ़",kind:"state",cities:["Raipur","Bhilai","Bilaspur","Korba"]},
+    {en:"Goa",hi:"गोवा",kind:"state",cities:["Panaji","Margao","Vasco da Gama","Mapusa"]},
+    {en:"Gujarat",hi:"गुजरात",kind:"state",cities:["Ahmedabad","Surat","Vadodara","Rajkot"]},
+    {en:"Haryana",hi:"हरियाणा",kind:"state",cities:["Gurugram","Faridabad","Panipat","Hisar"]},
+    {en:"Himachal Pradesh",hi:"हिमाचल प्रदेश",kind:"state",cities:["Shimla","Dharamshala","Mandi","Baddi"]},
+    {en:"Jharkhand",hi:"झारखंड",kind:"state",cities:["Ranchi","Jamshedpur","Dhanbad","Bokaro"]},
+    {en:"Karnataka",hi:"कर्नाटक",kind:"state",cities:["Bengaluru","Mysuru","Mangaluru","Hubballi"]},
+    {en:"Kerala",hi:"केरल",kind:"state",cities:["Kochi","Thiruvananthapuram","Kozhikode","Thrissur"]},
+    {en:"Madhya Pradesh",hi:"मध्य प्रदेश",kind:"state",cities:["Indore","Bhopal","Jabalpur","Gwalior"]},
+    {en:"Maharashtra",hi:"महाराष्ट्र",kind:"state",cities:["Mumbai","Pune","Nagpur","Nashik"]},
+    {en:"Manipur",hi:"मणिपुर",kind:"state",cities:["Imphal","Thoubal","Bishnupur","Churachandpur"]},
+    {en:"Meghalaya",hi:"मेघालय",kind:"state",cities:["Shillong","Tura","Jowai","Nongpoh"]},
+    {en:"Mizoram",hi:"मिज़ोरम",kind:"state",cities:["Aizawl","Lunglei","Champhai","Kolasib"]},
+    {en:"Nagaland",hi:"नागालैंड",kind:"state",cities:["Kohima","Dimapur","Mokokchung","Wokha"]},
+    {en:"Odisha",hi:"ओडिशा",kind:"state",cities:["Bhubaneswar","Cuttack","Rourkela","Sambalpur"]},
+    {en:"Punjab",hi:"पंजाब",kind:"state",cities:["Ludhiana","Amritsar","Jalandhar","Patiala"]},
+    {en:"Rajasthan",hi:"राजस्थान",kind:"state",cities:["Jaipur","Jodhpur","Udaipur","Kota"]},
+    {en:"Sikkim",hi:"सिक्किम",kind:"state",cities:["Gangtok","Namchi","Gyalshing","Mangan"]},
+    {en:"Tamil Nadu",hi:"तमिलनाडु",kind:"state",cities:["Chennai","Coimbatore","Madurai","Tiruchirappalli"]},
+    {en:"Telangana",hi:"तेलंगाना",kind:"state",cities:["Hyderabad","Warangal","Karimnagar","Nizamabad"]},
+    {en:"Tripura",hi:"त्रिपुरा",kind:"state",cities:["Agartala","Udaipur","Dharmanagar","Kailashahar"]},
+    {en:"Uttar Pradesh",hi:"उत्तर प्रदेश",kind:"state",cities:["Deoband","Saharanpur","Lucknow","Kanpur","Varanasi","Agra","Noida"]},
+    {en:"Uttarakhand",hi:"उत्तराखंड",kind:"state",cities:["Dehradun","Haridwar","Haldwani","Rudrapur"]},
+    {en:"West Bengal",hi:"पश्चिम बंगाल",kind:"state",cities:["Kolkata","Howrah","Durgapur","Siliguri"]},
+    {en:"Andaman and Nicobar Islands",hi:"अंडमान और निकोबार द्वीपसमूह",kind:"ut",cities:["Port Blair","Diglipur","Rangat"]},
+    {en:"Chandigarh",hi:"चंडीगढ़",kind:"ut",cities:["Chandigarh"]},
+    {en:"Dadra and Nagar Haveli and Daman and Diu",hi:"दादरा और नगर हवेली और दमन और दीव",kind:"ut",cities:["Daman","Diu","Silvassa"]},
+    {en:"Delhi",hi:"दिल्ली",kind:"ut",cities:["New Delhi","Delhi","Dwarka","Rohini"]},
+    {en:"Jammu and Kashmir",hi:"जम्मू और कश्मीर",kind:"ut",cities:["Jammu","Srinagar","Anantnag","Baramulla"]},
+    {en:"Ladakh",hi:"लद्दाख",kind:"ut",cities:["Leh","Kargil"]},
+    {en:"Lakshadweep",hi:"लक्षद्वीप",kind:"ut",cities:["Kavaratti","Agatti","Minicoy"]},
+    {en:"Puducherry",hi:"पुदुचेरी",kind:"ut",cities:["Puducherry","Karaikal","Mahe","Yanam"]}
+  ];
+
+  const POPULAR_ROUTES = [
+    {from:"Deoband",fromState:"Uttar Pradesh",to:"Delhi",toState:"Delhi"},
+    {from:"Delhi",fromState:"Delhi",to:"Jaipur",toState:"Rajasthan"},
+    {from:"Delhi",fromState:"Delhi",to:"Mumbai",toState:"Maharashtra"},
+    {from:"Mumbai",fromState:"Maharashtra",to:"Pune",toState:"Maharashtra"},
+    {from:"Bengaluru",fromState:"Karnataka",to:"Chennai",toState:"Tamil Nadu"},
+    {from:"Kolkata",fromState:"West Bengal",to:"Bhubaneswar",toState:"Odisha"},
+    {from:"Lucknow",fromState:"Uttar Pradesh",to:"Varanasi",toState:"Uttar Pradesh"},
+    {from:"Hyderabad",fromState:"Telangana",to:"Vijayawada",toState:"Andhra Pradesh"}
+  ];
+
   const VEHICLE_ICONS = ["▰", "▱", "◩", "▰", "▰", "◒", "✳", "↗"];
   const VEHICLE_PHOTOS = [
     "photo-1519003722824-194d4455a60c",
@@ -86,7 +165,7 @@
   let language = localStorage.getItem("sk-transport-language") === "hi" ? "hi" : "en";
 
   function t(key) {
-    return TEXT[language][key] || TEXT.en[key] || key;
+    return TEXT[language][key] || FEATURE_TEXT[language][key] || TEXT.en[key] || FEATURE_TEXT.en[key] || key;
   }
 
   function applyLanguage() {
@@ -95,11 +174,12 @@
     document.title = language === "hi" ? `${settings.business} | हर सामान, मंज़िल तक` : `${settings.business} | Every load. On the move.`;
     $('meta[name="description"]').content = language === "hi"
       ? "एस के ट्रांसपोर्ट, देवबंद से पूरे भारत में ट्रक, डीसीएम, छोटी गाड़ी, कार और ट्रैक्टर ट्रॉली की सेवा।"
-      : "S K Transport provides all-India transport service from Deoband. Book trucks, mini trucks, cars, tractors and more.";
+      : "Book nationwide transport with S K Transport, Deoband. Explore service options, states, cities and routes; request a truck, DCM, mini truck, car or tractor trolley.";
     $$("[data-i18n]").forEach((node) => { node.textContent = t(node.dataset.i18n); });
     $$("[data-i18n-html]").forEach((node) => { node.innerHTML = t(node.dataset.i18nHtml); });
     $$("[data-i18n-placeholder]").forEach((node) => { node.placeholder = t(node.dataset.i18nPlaceholder); });
     $$("[data-i18n-aria]").forEach((node) => { node.setAttribute("aria-label", t(node.dataset.i18nAria)); });
+    $("#india-map-title").textContent = t("mapTitle");
     $$("[data-i18n-label]").forEach((node) => {
       const firstText = [...node.childNodes].find((child) => child.nodeType === Node.TEXT_NODE);
       if (firstText) firstText.textContent = t(node.dataset.i18nLabel);
@@ -111,6 +191,12 @@
       button.setAttribute("aria-pressed", String(active));
     });
     renderFleet();
+    renderCoverage();
+    renderCapabilities();
+    renderCustomerTypes();
+    renderServiceOptions();
+    updateCitySuggestions("originState", "originCity");
+    updateCitySuggestions("destinationState", "destinationCity");
     if (!dashboard.hidden) translateAdminVehicles();
     if (!login.hidden) setLoginMode();
   }
@@ -126,6 +212,10 @@
       applyLanguage();
     });
   });
+
+  $("#coverage-search").addEventListener("input", renderCoverage);
+  $("#booking-form").elements.originState.addEventListener("change", () => updateCitySuggestions("originState", "originCity"));
+  $("#booking-form").elements.destinationState.addEventListener("change", () => updateCitySuggestions("destinationState", "destinationCity"));
 
   function loadSettings() {
     try {
@@ -156,6 +246,125 @@
     return String(value).replace(/[&<>"']/g, (character) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
     })[character]);
+  }
+
+  function localizedRegion(region) {
+    return language === "hi" ? region.hi : region.en;
+  }
+
+  function renderCapabilities() {
+    const grid = $("#capability-grid");
+    const icons = ["▰", "▱", "ϟ", "↗", "◉", "✳"];
+    grid.innerHTML = t("serviceTypes").map((name, index) => `
+      <article class="capability-card" tabindex="0" role="button" data-service-index="${index}">
+        <div class="capability-card-head"><span class="capability-icon">${icons[index]}</span><span class="capability-card-number">0${index + 1}</span></div>
+        <span class="capability-badge">${safeText(t("serviceBadge")[index])}</span>
+        <h3>${safeText(name)}</h3><p>${safeText(t("serviceCopy")[index])}</p>
+        <span class="capability-link">${safeText(t("fleetLink"))} <b>↗</b></span>
+      </article>`).join("");
+    $$(".capability-card", grid).forEach((card) => {
+      const choose = () => {
+        const select = $("#booking-service");
+        select.selectedIndex = Number(card.dataset.serviceIndex) + 1;
+        $("#book").scrollIntoView({ behavior: "smooth" });
+        select.focus({ preventScroll: true });
+      };
+      card.addEventListener("click", choose);
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          choose();
+        }
+      });
+    });
+  }
+
+  function renderCustomerTypes() {
+    const icons = ["⌂", "▦", "✳", "⌑", "⚙", "◉"];
+    $("#customer-grid").innerHTML = t("customerTypes").map((name, index) => `
+      <article class="customer-card"><span class="customer-icon">${icons[index]}</span><div><h3>${safeText(name)}</h3><p>${safeText(t("customerCopy")[index])}</p></div><span class="customer-arrow">↗</span></article>`).join("");
+  }
+
+  function renderServiceOptions() {
+    const select = $("#booking-service");
+    const selected = select.value;
+    select.innerHTML = `<option value="" disabled>${safeText(t("servicePlaceholder"))}</option>` +
+      t("serviceNames").map((name, index) => `<option value="${index + 1}">${safeText(name)}</option>`).join("");
+    if (selected) select.value = selected;
+    else select.selectedIndex = 0;
+    select.required = true;
+  }
+
+  function populateRegionSelects() {
+    $$("select.region-select").forEach((select) => {
+      const selected = select.value;
+      const isOrigin = select.name === "originState";
+      const placeholder = t(isOrigin ? "originStatePlaceholder" : "destinationStatePlaceholder");
+      select.innerHTML = `<option value="">${safeText(placeholder)}</option>` +
+        INDIA_REGIONS.map((region) => `<option value="${safeText(region.en)}">${safeText(localizedRegion(region))} · ${safeText(t("stateKind")[region.kind === "state" ? 0 : 1])}</option>`).join("");
+      if (selected && INDIA_REGIONS.some((region) => region.en === selected)) select.value = selected;
+    });
+  }
+
+  function updateCitySuggestions(stateField, cityField) {
+    const form = $("#booking-form");
+    const regionName = form.elements[stateField].value;
+    const region = INDIA_REGIONS.find((entry) => entry.en === regionName);
+    const datalistId = cityField === "originCity" ? "origin-city-options" : "destination-city-options";
+    const datalist = $(`#${datalistId}`);
+    datalist.innerHTML = (region?.cities || []).map((city) => `<option value="${safeText(city)}"></option>`).join("");
+  }
+
+  function setRoute({ from, fromState, to, toState }) {
+    const form = $("#booking-form");
+    form.elements.originState.value = fromState;
+    form.elements.originCity.value = from;
+    form.elements.destinationState.value = toState;
+    form.elements.destinationCity.value = to;
+    updateCitySuggestions("originState", "originCity");
+    updateCitySuggestions("destinationState", "destinationCity");
+    $("#book").scrollIntoView({ behavior: "smooth" });
+    form.elements.originCity.focus({ preventScroll: true });
+  }
+
+  function renderCoverage() {
+    populateRegionSelects();
+    const query = ($("#coverage-search")?.value || "").trim().toLocaleLowerCase();
+    const filtered = INDIA_REGIONS.filter((region) =>
+      [region.en, region.hi, ...region.cities].some((item) => item.toLocaleLowerCase().includes(query))
+    );
+    const list = $("#state-list");
+    list.innerHTML = filtered.length
+      ? filtered.map((region) => {
+        const kind = t("stateKind")[region.kind === "state" ? 0 : 1];
+        const cityNames = region.cities.slice(0, 5).join(" · ");
+        return `<article class="state-card">
+          <div class="state-card-title"><span class="state-pin" aria-hidden="true">⌖</span><div><span>${safeText(kind)}</span><h4>${safeText(localizedRegion(region))}</h4></div><span class="state-card-mark">IN</span></div>
+          <p><b>${safeText(t("cityLabel"))}:</b> ${safeText(cityNames)}</p>
+          <button type="button" class="state-route-button" data-route-state="${safeText(region.en)}">${safeText(t("bookThisRoute"))} <span>↗</span></button>
+        </article>`;
+      }).join("")
+      : `<div class="coverage-empty">${safeText(t("noResults"))}</div>`;
+    $$(".state-route-button", list).forEach((button) => {
+      button.addEventListener("click", () => {
+        const region = INDIA_REGIONS.find((entry) => entry.en === button.dataset.routeState);
+        if (!region) return;
+        setRoute({
+          from: "Deoband",
+          fromState: "Uttar Pradesh",
+          to: region.cities[0],
+          toState: region.en
+        });
+      });
+    });
+
+    $("#route-chips").innerHTML = POPULAR_ROUTES.map((route, index) => `
+      <button type="button" class="route-chip" data-route-index="${index}">
+        <span class="route-chip-icon">↗</span><span>${safeText(route.from)}<i>→</i>${safeText(route.to)}</span><b>↗</b>
+      </button>`).join("");
+    $$(".route-chip", $("#route-chips")).forEach((button) => {
+      button.addEventListener("click", () => setRoute(POPULAR_ROUTES[Number(button.dataset.routeIndex)]));
+    });
   }
 
   function renderFleet() {
@@ -233,13 +442,17 @@
     const messageVehicle = language === "hi"
       ? (DEFAULTS.vehicles.includes(data.vehicle) ? ["ट्रक", "डीसीएम", "छोटी गाड़ी", "बड़ी गाड़ी", "मिनी ट्रक", "कार", "ट्रैक्टर ट्रॉली"][DEFAULTS.vehicles.indexOf(data.vehicle)] : data.vehicle)
       : data.vehicle;
+    const serviceName = t("serviceNames")[Number(data.serviceType) - 1] || t("notSpecified");
+    const origin = [data.originCity, data.originState, data.originArea].filter(Boolean).join(", ");
+    const destination = [data.destinationCity, data.destinationState, data.destinationArea].filter(Boolean).join(", ");
     const lines = [
       `${t("bookingHeading")} - ${settings.business}`,
       `${t("vehicleLabel")}: ${messageVehicle}`,
+      `${t("serviceTypeLabel")}: ${serviceName}`,
       `${t("customerName")}: ${data.name}`,
       `${t("customerPhone")}: ${data.phone}`,
-      `${t("pickup")}: ${data.pickup}`,
-      `${t("drop")}: ${data.drop}`,
+      `${t("pickup")}: ${origin}`,
+      `${t("drop")}: ${destination}`,
       `${t("tripDate")}: ${data.date || t("dateFlexible")}`,
       `${t("load")}: ${data.load || t("notSpecified")}`,
       `${t("notes")}: ${data.message || t("none")}`
@@ -263,8 +476,15 @@
       name: data.name,
       phone: data.phone,
       vehicle: data.vehicle,
-      pickup: data.pickup,
-      drop: data.drop,
+      service_type: t("serviceNames")[Number(data.serviceType) - 1] || t("notSpecified"),
+      pickup_city: data.originCity,
+      pickup_state: data.originState,
+      pickup_area: data.originArea || t("none"),
+      destination_city: data.destinationCity,
+      destination_state: data.destinationState,
+      destination_area: data.destinationArea || t("none"),
+      pickup: [data.originCity, data.originState, data.originArea].filter(Boolean).join(", "),
+      drop: [data.destinationCity, data.destinationState, data.destinationArea].filter(Boolean).join(", "),
       date: data.date || t("dateFlexible"),
       load: data.load || t("notSpecified"),
       notes: data.message || t("none"),
@@ -335,10 +555,15 @@
     }
     const data = {
       vehicle: String(formData.get("vehicle") || ""),
+      serviceType: String(formData.get("serviceType") || ""),
       name: String(formData.get("name") || "").trim(),
       phone,
-      pickup: String(formData.get("pickup") || "").trim(),
-      drop: String(formData.get("drop") || "").trim(),
+      originState: String(formData.get("originState") || ""),
+      originCity: String(formData.get("originCity") || "").trim(),
+      originArea: String(formData.get("originArea") || "").trim(),
+      destinationState: String(formData.get("destinationState") || ""),
+      destinationCity: String(formData.get("destinationCity") || "").trim(),
+      destinationArea: String(formData.get("destinationArea") || "").trim(),
       date: String(formData.get("date") || ""),
       load: String(formData.get("load") || "").trim(),
       message: String(formData.get("message") || "").trim()
