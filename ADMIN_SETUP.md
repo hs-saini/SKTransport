@@ -1,30 +1,27 @@
-# Secure admin setup
+# S K Transport admin access
 
-The admin API keeps its password and signing secret in Vercel environment variables. Neither secret belongs in this repository, a browser, or a committed `.env` file.
+## Sign in
 
-## Connect persistent settings storage
+Open the [Admin login page](https://sktransportdeoband.vercel.app/admin.html).
 
-1. In the Vercel project for `sktransportdeoband`, open **Storage** and create a **private Blob** store.
-2. Connect the store to this project and enable the **Production** environment. Enable **Preview** only if preview deployments should share the same settings.
-3. Vercel supplies the Blob store ID and short-lived OIDC credentials to the connected deployment. Do not expose or copy these into client-side code.
+- Username: `admin`
+- The current password is in the local, Git-ignored `ADMIN_CREDENTIALS.txt` file in the project folder. Keep it private and do not email it, upload it, or commit it.
 
-## Configure private admin credentials
+The password was generated privately and is stored by Vercel as a Production Secret. It is not stored in website JavaScript, the browser, or GitHub. If the local credentials file is lost, change `ADMIN_PASSWORD` in the Vercel dashboard and redeploy; the previous password will stop working.
 
-In **Project → Settings → Environment Variables**, add these for **Production**:
+## Change the password
 
-- `ADMIN_PASSWORD`: use a fresh password of at least 14 characters. The password previously shared in chat should not be reused.
-- `ADMIN_SESSION_SECRET`: generate a private random secret locally with `node -e "console.log(require('node:crypto').randomBytes(48).toString('base64url'))"` and add its output as the value.
-- `ADMIN_USERNAME` (optional): defaults to `admin`.
+1. Open [Vercel project environment variables](https://vercel.com/hsaini/sktransportdeoband/settings/environment-variables).
+2. Edit `ADMIN_PASSWORD` for **Production**. Use a new password of at least 14 characters.
+3. Redeploy the project for the change to take effect.
+4. Update the local `ADMIN_CREDENTIALS.txt` file with the new password and keep it private.
 
-Do not paste the password or generated session secret into source files, GitHub, chat, or the browser console. Vercel stores project environment variables as deployment secrets.
+Do not reuse the password previously shared in chat.
 
-After connecting storage and adding variables, redeploy the latest production commit. Then open `/admin.html`, log in, save a small test change, and check the public homepage in a private/incognito window. Admin settings are stored in private Blob and served to all visitors from `/api/settings`.
+## Shared admin and security
 
-## What is protected
-
-- The admin password is checked only in a Vercel Function. It is never sent to or stored in website JavaScript or local storage.
-- Successful login creates an eight-hour, HTTP-only, secure, same-site cookie.
-- Settings writes require that session and a same-origin request; login attempts are rate-limited per function instance.
-- Public website settings are readable without login, but the private Blob and all write operations are not.
-
-If the environment variables or connected Blob store are absent, the admin API fails closed and displays a configuration error rather than saving changes only in one browser.
+- A private Vercel Blob store connected to the Production project holds shared site settings. Admin changes are available to all site visitors.
+- `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, and the Blob access token are Vercel Production Secrets; none are committed to GitHub.
+- The API checks the password server-side and issues an eight-hour HTTP-only session cookie.
+- Settings writes require a valid session and a same-origin request. Unauthenticated writes are rejected.
+- Public settings are readable without login so the website can render the business details, fleet, menu, and routes.
