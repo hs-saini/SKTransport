@@ -2,6 +2,12 @@
   "use strict";
   const isAdminPage = new URLSearchParams(window.location.search).get("admin") === "1";
 
+  if (!isAdminPage && "serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").catch((error) => {
+      console.error("Service worker registration failed:", error);
+    });
+  }
+
   const DEFAULT_MENU_ITEMS = [
     { en: "Our fleet", hi: "हमारी गाड़ियाँ", href: "#services" },
     { en: "Services", hi: "सेवाएँ", href: "#capabilities" },

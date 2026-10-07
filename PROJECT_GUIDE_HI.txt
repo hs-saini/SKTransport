@@ -1,0 +1,756 @@
+S K TRANSPORT WEBSITE AUR PWA - VISTAR SE HINDI GUIDE
+======================================================
+
+Yeh guide project ke maujooda source code ko padhkar taiyar ki gayi hai.
+Isme website ke pages, JavaScript functions, design, API, admin security,
+tests, PWA files, Git aur Vercel ka kaam samjhaya gaya hai.
+
+Zaroori sachchai:
+- Website ka poora purana development history Git files se hamesha maloom
+  nahi hota. Isliye yeh guide maujooda code aur dekhe ja sake Git state ka
+  varnan karti hai; yeh dawa nahi karti ki website ka har purana hissa isi
+  session mein banaya gaya tha.
+- Is session mein PWA setup add hua: manifest, service worker registration,
+  app icons aur Apple touch icon.
+- Is session mein Git push ya Vercel deployment nahi kiya gaya. Ant mein
+  push/redeploy ke sahi steps diye gaye hain.
+- Is guide ya source ke zariye password, secret, Blob token ya private
+  credential share nahi kiya gaya hai.
+
+
+1. WEBSITE KA SARAL NAKSHA
+--------------------------
+
+Visitor ke browser mein:
+
+  index.html
+      +-- styles.css       rang, layout, responsive design aur animation
+      +-- script.js        Hindi/English, booking form, fleet, settings aur admin UI
+      +-- manifest.json    browser ko website ko installable app batata hai
+      +-- sw.js            app ki zaroori static files cache karta hai
+      +-- PNG icons        app install hone par icon dikhate hain
+
+Vercel par server side:
+
+  /api/admin-session  -> api/admin-session.js -> server/admin.js
+  /api/settings       -> api/settings.js      -> server/admin.js
+                                                   + @vercel/blob
+
+Tests:
+
+  tests/admin-api.test.js -> login, session, input aur settings API ki jaanch
+
+Yeh React/Vue application nahi hai. Front end seedha HTML, CSS aur browser
+JavaScript hai. `api` folder ke handlers Vercel par serverless functions ke
+roop mein chalte hain; alag `server.js` file is repository mein nahi hai.
+
+
+2. WEBSITE KHOLNE PAR KYA HOTA HAI
+---------------------------------
+
+1. Browser `index.html` download karke page ka dhaancha dikhata hai.
+2. `styles.css` desktop/mobile layout aur rang lagata hai.
+3. `script.js` HTML ke khaali dynamic containers bharta hai: fleet cards,
+   routes, service cards aur menu links.
+4. Script pehle default business settings dikhata hai aur `/api/settings`
+   se shared settings laane ki koshish karta hai.
+5. Browser visitor ko English ya Hindi chunne deta hai. Chunav localStorage
+   mein yaad rakha jata hai.
+6. Booking par email bhejne ki koshish hoti hai; saath mein WhatsApp/SMS ka
+   message taiyar hota hai jise visitor khud review karke bhej sakta hai.
+7. Admin login alag server API se verify hota hai. Safal login ke baad
+   settings save karne ki API ko authenticated request bheji jaati hai.
+8. Normal public page par service worker register hota hai aur static
+   app-shell cache kiya ja sakta hai.
+
+
+3. `index.html` - PAGE KA DHAANCHA
+----------------------------------
+
+`<!doctype html>` browser ko HTML5 mode mein rakhta hai.
+`<html lang="en">` page ki default bhasha batata hai. JavaScript ise Hindi
+chunne par `hi` kar deta hai.
+
+`<head>` ke important kaam:
+- `charset` UTF-8 Hindi aur doosre akshar sahi dikhata hai.
+- `viewport` mobile screen ke size ke mutabik page scale karta hai.
+- `theme-color` browser/app ke theme rang ko blue karta hai.
+- `rel="manifest"` `/manifest.json` ko PWA settings se jodta hai.
+- icon links browser tab aur Apple home screen ke icons dete hain.
+- description, canonical, Open Graph aur Twitter meta tags search aur
+  social-sharing preview ke liye hain.
+- JSON-LD mein `LocalBusiness`, location, phone aur service area diya gaya
+  hai, jisse search engine ko business ka structured data milta hai.
+- Google Fonts ke preconnect/font links heading, body aur Hindi font laate
+  hain. Font network unavailable ho to CSS fallback fonts hain.
+- `styles.css` visual design load karta hai.
+
+`<body>` ke mukhya hisse:
+- Announcement bar: seva aur availability ka chhota banner.
+- Header/brand: logo-style SVG, business naam, language buttons, navigation
+  aur booking link.
+- Hero: bada headline, call/book buttons aur inline SVG truck illustration.
+- Ticker: vehicle types ki chalti hui patti.
+- Services/fleet: JavaScript `#fleet-grid` ko gाड़ियों ke cards se bharta hai.
+- Capabilities: `#capability-grid` mein service cards; click karne par form
+  mein service chuni ja sakti hai.
+- Pan-India strip: booking section tak pahunchne ka shortcut.
+- Routes: `#routes-grid` mein suggested routes; button pickup/drop bharte hain.
+- About: business ka parichay, owner aur inline SVG truck art.
+- Booking: vehicle, service, contact, pickup, destination aur doosri details
+  lene wala form.
+- Contact strip: pata, phone aur available email contacts.
+- Footer: links, contact aur admin trigger.
+- WhatsApp floating link: script phone number ke mutabik link update karta hai.
+- Admin `<dialog>`: login form aur settings dashboard ka HTML; aam public
+  visitor ko admin-only CSS ke bina dashboard nahi dikhaya jata.
+- Ant ka `script.js` link front-end functionality chalata hai.
+
+`data-i18n`, `data-i18n-html`, `data-i18n-placeholder`, `data-i18n-aria`
+aur `data-i18n-label` attributes translations ke keys hain. IDs, jaise
+`booking-form`, `fleet-grid` aur `routes-grid`, JavaScript ko sahi element
+dhoondhne dete hain.
+
+Form ke `required`, `maxlength`, `type=email`, `type=tel`, checkbox consent
+aur `reportValidity()` basic browser validation dete hain. Phone ke digits
+ki extra jaanch JavaScript karta hai.
+
+
+4. `styles.css` - DESIGN AUR MOBILE LAYOUT
+------------------------------------------
+
+File mein compact, kai jagah ek hi line par likhe CSS rules hain; isliye
+line ki lambai dekhkar uska kaam nahi badalta.
+
+- `:root` mein CSS variables hain: dark ink, cream, orange, text colors,
+  heading/body font aur responsive horizontal padding.
+- `* { box-sizing: border-box }` width/height hisaab ko predictable banata hai.
+- Global `body`, `a`, `button`, `input`, `textarea` niyam base font, margin,
+  colors aur controls ka default set karte hain.
+- Header/brand/navigation selectors top bar aur menu ko style karte hain.
+- `.hero`, `.hero-art`, `.hero-truck`, `.road`, `.sun-disc`, `.speed-lines`
+  hero ka layered background, truck art, road aur motion banate hain.
+- `.services`, `.fleet-*`, `.capabilities`, `.route-card`, `.about`,
+  `.booking`, `.contact-*` page ke alag sections/cards/forms ko style karte
+  hain.
+- `.admin-*` selectors dialog, login, dashboard, vehicle/menu/route editors
+  ko style karte hain.
+- `.footer-*` aur `.whatsapp-float` footer aur floating WhatsApp button hain.
+- `.hindi` selectors Hindi font aur text ke liye kuch size/spacing badalte hain.
+- `@keyframes` animation ke steps define karta hai; jaise hero entry, truck
+  movement, ticker, road ya decorative effects.
+- `@media` rules tablet aur mobile widths par grids, navigation, cards aur
+  footer ko adjust karte hain.
+- `prefers-reduced-motion` setting wale visitor ke liye kuch animations
+  band/reduce karta hai.
+- `body.admin-only` public content chhupakar admin login view ko akela
+  dikhane mein madad karta hai.
+
+CSS responsive design karta hai; alag mobile HTML page ki zaroorat nahi hai.
+File mein kuch purane/extra coverage/map/customer selectors bhi hain. Kisi
+selector ka CSS mein hona yeh sabit nahi karta ki woh current HTML page mein
+istemal ho raha hai.
+
+
+5. `script.js` - FRONT-END JAVASCRIPT KE FUNCTIONS
+-------------------------------------------------
+
+Shuruaat ek IIFE `( () => { ... })()` se hoti hai. Isse variables global
+browser namespace mein nahi phailte. `"use strict"` JavaScript ke sakht
+niyam chalu karta hai.
+
+Service worker registration:
+- `isAdminPage` URL ke `?admin=1` query ko check karta hai.
+- Normal public site mein `navigator.serviceWorker.register("/sw.js")` chalta
+  hai. Admin iframe/view ke liye registration nahi karte.
+- Registration fail ho to `console.error` mein asal error dikhate hain;
+  error chupakar success nahi dikhate.
+
+Settings aur constant groups:
+- `DEFAULT_MENU_ITEMS`, `DEFAULT_ROUTES`, `DEFAULTS`: API response na milne
+  par dikhane ke liye business, fleet, menu aur route defaults.
+- `MENU_TARGETS`, `MAX_MENU_ITEMS`, `MAX_ROUTES`: admin form ke valid targets
+  aur maximum list limits.
+- `SERVICE_OPTION_INDEX`: capability card se booking dropdown ka sambandh.
+- `TEXT`, `FEATURE_TEXT`: English aur Hindi ke UI strings.
+- `VEHICLE_COPY`, `VEHICLE_ICONS`, `VEHICLE_PHOTOS`: fleet cards ka
+  description, decorative symbol aur default image.
+
+Translation aur DOM helpers:
+- `$ (selector, root)` ek matching element dhoondhta hai
+  (`querySelector` ka chhota helper).
+- `$$ (selector, root)` sab matching elements ko array banata hai.
+- `t(key)` chuni hui bhasha ka text leta hai; feature strings, English
+  fallback aur ant mein key fallback ka kram hai.
+- `applyLanguage()` document lang/title/meta ko update karta hai; har
+  `data-i18n*` element par sahi text/placeholder/ARIA label lagata hai.
+  Iske baad fleet, service, menu aur route content dobara render hota hai.
+- `[data-language]` buttons click listener bhasha badalta hai; localStorage
+  mein selection rakhne ki koshish hoti hai.
+- `safeText(value)` HTML special characters ko escape karta hai, taaki
+  settings se bana text markup/script na ban jaye.
+- `formatPhone(value)` 10 digit phone ko padhne layak 5+5 format deta hai.
+- `validPhotoUrl(value)` vehicle photo URL ko HTTPS hona zaroori karta hai.
+- `defaultVehiclePhoto(index)` Unsplash photo list se default image URL deta hai.
+
+Settings:
+- `loadSettings()` defaults ki alag copy aur gaadiyon ki default photos banata hai.
+- `normalizeSettings(saved)` API se aayi settings ko type, list limit,
+  image URL, menu target aur route ke hisab se normalize karta hai.
+- `requestSharedSettings()` same-origin `/api/settings` GET request karta hai;
+  HTTP failure par error throw karta hai.
+- `refreshSharedSettings()` settings laakar page render/translate karta hai.
+  Network/API error ko console mein spasht log karta hai; initial defaults
+  page par reh sakte hain.
+- `renderSettings()` business, owner, address, phone links, email, fleet,
+  routes/menu aur WhatsApp ko current settings se update karta hai.
+- `updateWhatsAppLink()` floating WhatsApp aur driver contact ke liye
+  number aur Hindi/English message lagata hai.
+
+Page ke dynamic sections:
+- `renderCapabilities()` capability cards banata hai; mouse click, Enter ya
+  Space par booking form tak le jaakar relevant service chunta hai.
+- `renderServiceHighlights()` chhote highlight labels/icon banata hai.
+- `menuTargetLabel(href)` admin menu target ko English/Hindi naam deta hai.
+- `renderMenuItems()` header/footer menu links ko settings se banata hai.
+- `renderRoutes()` routes dikhata hai. Route button pickup/drop fields bharta
+  hai aur form tak scroll karta hai.
+- `renderServiceOptions()` language ke hisab se service `<select>` options
+  dobara banata aur selection ko jahan mumkin ho banaye rakhta hai.
+- `renderFleet()` photo cards aur vehicle radio choices banata hai. Pehle
+  chuni gaadi preserve hoti hai; card click/keyboard se radio select hota hai.
+  Image fail ho to fallback photo; fallback bhi fail ho to unavailable state.
+
+Booking:
+- `composeMessage(data)` form values ko selected language mein readable
+  multiline booking message banata hai.
+- `smsLink(number, message)` phone/message ko SMS URL mein encode karta hai;
+  iOS aur doosre devices ke separator ka farq rakhta hai.
+- `whatsappUrl(number, message)` number ko digits mein normalize karta hai,
+  10-digit number par India code jodta hai, aur message URL-encode karta hai.
+- `sendBookingEmail(data, message)` FormSubmit AJAX endpoint ko JSON bhejta
+  hai. Optional alternate email alag ho to CC deta hai. Network, unreadable
+  JSON, provider failure aur activation pending ko error banata hai.
+- `showBookingActions(result, message)` WhatsApp, SMS aur clipboard buttons
+  banata hai. Clipboard fail ho to console log aur UI fallback dikhata hai.
+- `#booking-form` submit listener: default browser submit rokta hai,
+  browser validation chalata hai, 10+ phone digits maangta hai, data padhta
+  hai, double submit rokta hai, button disable karta hai, email send karta
+  hai aur result/fallback links dikhakar button wapas enable karta hai.
+- Email provider request website se bahar FormSubmit ko jaati hai. Booking
+  email provider ki activation agar required ho to business ko activation
+  email confirm karni pad sakti hai.
+
+Admin interface:
+- `setLoginMode()` login copy, submit label aur purana error clear karta hai.
+- `fillSettingsForm()` server settings GET karke admin inputs/vehicle/menu/
+  route editors bhar deta hai.
+- `renderAdminMenuItems()` bilingual menu inputs aur valid destination select
+  banata hai; input/change/remove events internal list ko update karte hain.
+- `renderAdminRoutes()` route start/end inputs banata hai; edit aur remove
+  events list ko update karte hain.
+- `renderAdminVehicles()` vehicle name/photo editor, preview aur remove
+  button banata hai; HTTPS photo validation aur kam-se-kam ek vehicle rule hai.
+- `translateAdminVehicles()` remove button ke text/accessible label ko
+  current language mein update karta hai.
+- `showDashboard()` server se settings load karta hai; failure par admin
+  error dikhata hai, safal hone par login chhupakar dashboard dikhata hai.
+- `openAdminDialog()` login screen set karke modal kholta hai.
+- `#admin-auth-form` POST `/api/admin-session` karta hai; server ka error
+  dikhata hai, safal par password form reset aur dashboard load karta hai.
+- Add vehicle/menu/route listeners duplicate/limit/empty checks karte hain,
+  nayi row banate hain aur uske input par focus dete hain.
+- `#settings-form` submit browser validation ke baad cleaned settings object
+  banata hai, PUT `/api/settings` bhejta hai, response ko normalize/render
+  karta hai aur error/success ko dikhata hai.
+- Logout DELETE `/api/admin-session` karta hai; server confirmation ke baad
+  dialog band karta hai. Failure chupaya nahi jata.
+- Dialog close listener admin-only page se website par lautata hai.
+- `visibilitychange` par tab dobara visible ho to shared settings refresh hoti hai.
+- Menu toggle mobile nav kholta/band karta hai aur `aria-expanded` update karta hai.
+- Footer service clicks dropdown mein service set karte hain.
+- `#year` current copyright year lagata hai.
+- `IntersectionObserver` scroll par sections/cards ko reveal karta hai.
+- `matchMedia` pointer/reduced-motion check karke desktop pointer movement
+  se hero art ko halka parallax deta hai ya motion ko band rakhta hai.
+
+
+6. `manifest.json` - INSTALLABLE WEB APP KI PEHCHAAN
+----------------------------------------------------
+
+- `id` aur `start_url` app ko root homepage se shuru karte hain.
+- `name` aur `short_name` install dialog/home-screen label hain.
+- `scope` app ke andar ke URL ka scope batata hai.
+- `display: standalone` installed app ko browser toolbar ke bina app-jaisa
+  dikhane ka nirdesh hai.
+- `background_color` launch background; `theme_color` browser/app theme hai.
+- `lang` default locale hai.
+- `icons` 192x192 aur 512x512 PNG app icons ko size/MIME ke saath declare karte hain.
+
+Yahan Vercel configuration static site ko project root se serve karti hai;
+isliye manifest/icon/service worker project root mein hain. `public` folder
+banana is project layout mein zaroori nahi. HTML mein sahi tag
+`<link rel="manifest" href="/manifest.json">` hai. Theme rang alag
+`<meta name="theme-color" content="#0d6efd">` tag hota hai; manifest link ke
+andar `content` attribute lagana sahi tareeqa nahi hota.
+
+
+7. `sw.js` - SERVICE WORKER AUR OFFLINE APP SHELL
+-------------------------------------------------
+
+- `CACHE_NAME` version-named cache hai. Naya version purane project caches
+  ko activate par hata sakta hai.
+- `APP_SHELL` homepage, HTML/CSS/JS, manifest aur icons ki fixed list hai.
+- `install` event cache kholta, poori app-shell list ko cache karta aur cache
+  kamyab hone par naya worker activate karne ko kehta hai.
+- `activate` purane `sk-transport-shell-*` caches delete karta aur naye
+  worker ko open pages ka control lene deta hai.
+- `fetch` event sirf same-origin, GET, bina query wali requests intercept karta.
+- Homepage navigation pehle network se milti hai; network unavailable ho to
+  cached `/index.html` milta hai.
+- Static files cache mein hon to cache se aati hain; cache miss par network
+  se fetch hota hai.
+- API, POST/PUT/DELETE, third-party requests aur query-string requests is
+  caching rule se exclude hain. Isse admin/API responses ko offline cache
+  karne ka jokhim nahi liya gaya.
+- Agar install ke samay cache list ki file uplabdh na ho, service worker
+  install fail ho sakta hai; browser console aur DevTools Application tab
+  is tarah ki dikkat dekhne ki jagah hain.
+
+Offline mode poori backend service offline nahi banata. Admin API, live
+settings, booking email aur external vehicle photos ko network chahiye ho
+sakta hai. Offline mein cached page khulna aur sab external features ka
+chalna ek hi baat nahi.
+
+
+8. `api/admin-session.js` - ADMIN LOGIN API
+-------------------------------------------
+
+Yeh Vercel serverless handler hai; `server.js` naam ki standalone file nahi.
+`handler(req, res)` HTTP method ke mutabik:
+- GET: signed session cookie jaanchkar `authenticated` status deta hai.
+- POST: same-origin, server configuration aur rate limit check karta hai;
+  username/password match par session cookie banata hai.
+- DELETE: session cookie expire karke logout karta hai.
+- doosre method: HTTP 405 aur allowed method list deta hai.
+- Login body galat JSON ho to HTTP 400; galat credentials HTTP 401;
+  zyada attempts HTTP 429; secret/storage configuration taiyar na ho to 503.
+- Cookie value response JSON mein nahi bheji jaati; cookie HTTP-only hai.
+
+
+9. `api/settings.js` - SHARED SETTINGS API
+------------------------------------------
+
+`handler(req, res)`:
+- GET: public page ko business settings dene ke liye storage configured ho
+  to private Blob se settings padhta hai. Nayi installation/default case
+  mein `DEFAULT_SETTINGS` de sakta hai. Read/storage problem par 503.
+- PUT: same-origin aur authenticated admin session dono maangta hai.
+  Configuration missing ho to 503.
+- Body ko `validateSettings()` se jaanchta, private Blob mein save karta aur
+  safal saved settings return karta hai.
+- Galat input ke liye 400; storage failure ke liye 503; unsupported method
+  ke liye 405.
+- Browser ko private Blob token dene ke bajaye server-side handler hi
+  credential use karta hai.
+
+
+10. `server/admin.js` - SHARED SECURITY/STORAGE HELPERS
+------------------------------------------------------
+
+- `DEFAULT_SETTINGS`: pehli baar ya data na milne par business/fleet/menu/
+  route defaults.
+- `respond(res, status, data, headers)`: JSON response, `no-store`,
+  `nosniff` aur referrer-policy headers set karke response bhejta hai.
+- `setCookie(...)`: HTTP-only, SameSite Strict, `/api` path aur expiry ke
+  saath cookie set karta hai; Vercel production par Secure flag bhi hota hai.
+- `isSameOrigin(req)`: Origin/host/protocol compare karke cross-site
+  mutation rokne mein madad karta hai.
+- `credentialsConfigured()`: password length aur session-signing secret ki
+  minimum readiness check karta hai.
+- `equalSecret(...)`: barabar length check ke baad constant-time
+  `timingSafeEqual` istemal karta hai.
+- `sessionSignature(payload)`: HMAC-SHA256 se session payload sign karta hai.
+- `readCookie(req)`: request se admin cookie alag karta hai.
+- `hasAdminSession(req)`: signature verify, payload parse aur expiry check
+  karta hai; malformed/expired cookie ko valid nahi maanta.
+- `requireSameOrigin(...)`, `requireAdminSession(...)`: API mein common
+  security guard; na-manzur request par 403/401 bhejte hain.
+- `adminConfigurationReady()` aur `settingsConfigurationReady()`:
+  Vercel Blob aur auth secrets configured hone ki jaanch.
+- `readJsonBody(req)`: object body leta ya string JSON parse karta hai.
+- `text(...)`, `email(...)`, `phone(...)`: trim, required/optional,
+  maximum length aur format/digits validate karte hain.
+- `validateSettings(value)`: object size (64 KiB), vehicle count/photos,
+  menu targets/count, routes/count, HTTPS image URLs aur business fields
+  validate karke sirf expected fields ka clean object return karta hai.
+- `readSharedSettings()`: private Blob se JSON laata hai; absent data par
+  clone kiye defaults deta hai.
+- `writeSharedSettings(settings)`: dobara validate karke private Blob par
+  shared settings overwrite karta hai.
+- `clientKey(req)`: rate limit ke liye forwarded IP ya remote address chunta hai.
+- `checkLoginRateLimit(req)`: temporarily blocked client ko rokta hai.
+- `recordLoginFailure(req)`: galat login count karta; paanch failures par
+  15 minute block lagata hai. Badi in-memory list ko purane entries se saaf
+  karta hai. Serverless workers alag hon to in-memory limit har worker ka
+  apna state ho sakta hai.
+- `clearLoginFailures(req)`: sahi login par us client ka failure state hatata hai.
+- `createSessionCookie(res)`: random nonce aur 8-hour expiry wala signed session
+  cookie banata hai.
+- `clearSessionCookie(res)`: cookie ko zero max-age se khatam karta hai.
+- `credentialsMatch(username, password)`: Vercel env credentials verify karta;
+  default username `admin` ho sakta hai, password env secret se hi aata hai.
+- `isPasswordConfigured()`: auth readiness batata hai.
+
+`@vercel/blob` ki `get` aur `put` server-side par private settings JSON
+padhne/save karne ke liye import hoti hain.
+
+
+11. `tests/admin-api.test.js` - AUTOMATED TESTS
+------------------------------------------------
+
+Yeh Node.js ka built-in `node:test` aur `node:assert/strict` chalata hai.
+Tests ke liye process ke andar dummy test secrets set karta hai; yeh
+production passwords/tokens nahi hain.
+
+- `mockResponse()` status, headers aur response body ka chhota test double hai.
+- `request()` API request ka test object banata hai.
+- Settings validation test sahi values accept aur non-HTTPS photo reject
+  hone ki jaanch karta hai.
+- Login test successful auth par HTTP-only/SameSite cookie aur valid session
+  jaanchta hai.
+- Bad password aur cross-origin login ko reject karne ki jaanch hoti hai.
+- Anonymous settings PUT ko 401 milta hai.
+- Blob configuration ke bina public settings GET defaults deta hai.
+- `finally` test ke dauran badla hua test environment wapas set karta hai.
+
+Test run karne ka command:
+  npm.cmd test
+
+
+12. `package.json`, `package-lock.json`, `node_modules`
+-------------------------------------------------------
+
+`package.json` project ka package manifest hai:
+- naam `sk-transport-site`.
+- `private: true` npm ko accidental public package publish se rokta hai.
+- `type: module` `.js` files mein ES module `import`/`export` enable karta hai.
+- `engines.node` kam-se-kam Node 20 batata hai.
+- `scripts.test` `node --test` chalata hai.
+- `@vercel/blob` ek direct dependency hai.
+
+`package-lock.json` npm ke resolved package versions aur integrity hashes
+record karta hai, taaki install repeatable ho.
+
+`node_modules` npm install ke baad dependencies ki local copy hai. Yeh
+generated/bahut bada folder hai; ise Git mein commit/push nahi karte.
+Vercel deployment dependencies ko manifests/lock file se install karta hai.
+
+Node.js project ke liye Python/Pip use nahi hua.
+
+
+13. `.gitignore`, `.vercel`, SECRET SAFETY
+------------------------------------------
+
+`.gitignore`:
+- `node_modules`: installed dependencies ko Git se bahar rakhta hai.
+- `.vercel`: local Vercel project link/config metadata ko Git se bahar rakhta hai.
+- `.env*`: local environment secrets ko commit hone se bachata hai.
+- `!.env.example`: agar safe example env file ho to use ignore se allow karta hai.
+- `ADMIN_CREDENTIALS.txt`: local admin credential note ko commit hone se
+  spasht roop se rokta hai.
+
+Vercel dashboard ke production environment variables (jaise admin password,
+session secret aur Blob credential) private rakhne chahiye. Unhe HTML,
+JavaScript, documentation, screenshots ya GitHub mein paste nahi karna.
+`ADMIN_SETUP.md` admin setup ki aur jaankari deta hai; private credential
+file ko kabhi public nahi karna.
+
+
+14. DOOSRI ROOT FILES
+---------------------
+
+- `admin.html`: admin-only wrapper; website ko iframe mein `?admin=1` ke
+  saath kholta hai aur back link deta hai.
+- `robots.txt`: crawler ko site crawl karne deta hai aur sitemap batata hai.
+- `sitemap.xml`: public homepage URL search engines ko deta hai.
+- Google verification HTML: search-console ownership verify karne ki file.
+- `app-ads.txt`: advertising inventory ke liye plain text declaration; PWA
+  ya site JavaScript ka hissa nahi.
+- `Designer (3).png`: user dwara diya gaya 256x256 logo source.
+- `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`: isi supplied logo
+  se banaye gaye app icons.
+- `.vercel/project.json`: local Vercel link metadata; `.vercel` ignore hota hai.
+- `ADMIN_SETUP.md`: admin login, secret management aur shared storage ka
+  operational guide.
+
+
+15. IS KAAM MEIN AAYI ASAL DIKKATEIN AUR UNKA HAL
+-------------------------------------------------
+
+Pehle diye gaye PWA snippet mein HTML tag galat tha: manifest link ke
+`href` mein `/heme-color` tha aur usi `<link>` par `content` attribute diya
+gaya tha. Use do sahi tags mein alag kiya:
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#0d6efd">
+
+Suggested `public` folder yahan use nahi kiya, kyunki project ka static
+homepage aur assets Vercel root se serve hote hain. Root files ke URL
+`/manifest.json`, `/sw.js` aur `/icon-192.png` hote hain.
+
+Logo image 256x256 thi jabki PWA ko 192x192 aur 512x512 icons chahiye the.
+Image se dono exact-size PNG aur 180x180 Apple touch icon generate kiye.
+
+PowerShell mein `npm test` chalane par Windows execution policy ne
+`npm.ps1` ko roka. Workaround shell policy badalna nahi tha; Windows npm
+launcher `npm.cmd test` chalaya aur sab 5 tests pass hue.
+
+PWA validation ke pehle inline Node command par PowerShell ne quotes hata
+kar JavaScript parse error diya. Command ko quoted here-string ke zariye
+Node ko pipe kiya; manifest, icon dimensions, registration link aur syntax
+checks phir pass hue. Yeh command quoting ki samasya thi, website ke source
+code ki runtime failure nahi.
+
+Is session ki jaanch mein application test failures nahi mile. Is session
+mein Vercel deploy nahi kiya; isliye live deployment/build error ka dawa
+nahi kiya ja raha. Kisi future runtime error ke liye browser DevTools
+Console/Network, Vercel Deployment/Function logs, aur `npm.cmd test` dekhein.
+
+
+16. TEST/VERIFY KIYE GAYE CHECKS
+--------------------------------
+
+- `npm.cmd test`: 5 tests pass, 0 fail.
+- `node --check script.js`: pass.
+- `node --check sw.js`: pass.
+- `manifest.json`: valid JSON, `start_url="/"`, `display="standalone"`.
+- PNG signature aur manifest se declared width/height verify kiye.
+- HTML manifest link aur service-worker registration verify kiye.
+- `git diff --check`: whitespace error nahi.
+- Editor Problems jaanch: index.html, script.js aur sw.js mein error nahi.
+
+
+17. GIT PAR PUSH KAISE KARNA HAI
+--------------------------------
+
+Jaanch ke waqt local branch `main` thi aur Git remote `origin` GitHub
+repository `hs-saini/SKTransport` ko point karta tha. Latest dikh raha
+commit `origin/main` ke saath tha. Lekin is session ki PWA file edits aur
+is guide ko commit/push nahi kiya gaya hai; source ke alawa pehle se maujood
+untracked user files bhi working tree mein ho sakti hain.
+
+PowerShell mein:
+
+  git status --short
+  git diff --check
+  npm.cmd test
+
+Phir sirf apne intended files stage karein. Udaharan:
+
+  git add index.html script.js manifest.json sw.js icon-192.png icon-512.png apple-touch-icon.png PROJECT_GUIDE_HI.txt
+  git diff --cached --check
+  git diff --cached --stat
+  git commit -m "Add installable PWA and Hindi project guide"
+  git push origin main
+
+`Designer (3).png` aur `app-ads.txt` pehle se untracked the; unhe tabhi
+stage karein jab aap unhe bhi repository mein rakhna chahte hon. `node_modules`,
+`.env` ya `ADMIN_CREDENTIALS.txt` ko stage na karein. Commit se pehle
+`git status --short` aur staged diff dhyan se dekhein.
+
+
+18. VERCEL PAR DEPLOY AUR PWA CHECK
+-----------------------------------
+
+Vercel project GitHub repository se connected ho to `main` par successful
+push aam taur par naya deployment trigger karta hai. Is session mein push
+nahi hua, isliye live site abhi in PWA changes ko serve kar rahi hai, aisa
+maan lena sahi nahi hoga.
+
+Push ke baad:
+1. Vercel dashboard mein S K Transport project ka latest deployment kholen.
+2. Build/deployment ka status Ready ho aur logs mein error na ho, yeh dekhein.
+3. Live site kholkar installability/browser DevTools Application > Manifest
+   mein app naam, standalone display aur icons verify karein.
+4. In URLs ko browser mein kholen:
+     https://sktransportdeoband.vercel.app/manifest.json
+     https://sktransportdeoband.vercel.app/sw.js
+     https://sktransportdeoband.vercel.app/icon-192.png
+     https://sktransportdeoband.vercel.app/icon-512.png
+5. DevTools Application > Service Workers mein registration/install state
+   dekhein. Offline test ke liye pehle app online load/cache hone dein,
+   phir DevTools Network se offline simulate karein.
+6. PWABuilder mein site ka live URL dobara scan karein.
+
+HTTPS/secure context service worker aur installability ke liye zaroori hai.
+Offline test pehli baar bilkul nayi installation par kaam nahi karega,
+kyunki static files ko cache karne ke liye pehle successful online visit
+zaroori hai.
+
+
+19. SOURCE FILES MEIN HISSE KAHAN MILENGE
+------------------------------------------
+
+Yeh line numbers iss waqt ke source snapshot ke liye hain. CSS kaafi
+compact hai aur ek line mein kai selectors ho sakte hain; line number
+section ko dhoondhne ke liye hai, har visual property ki alag numbered
+line ki guarantee nahi.
+
+index.html:
+  1-55    head, SEO/social metadata, JSON-LD, fonts aur stylesheet.
+  56-68   brand, language buttons aur navigation.
+  69-115  hero aur truck SVG.
+  116     ticker.
+  118-123 fleet section.
+  124-130 capability/service section.
+  131     nationwide booking strip.
+  133-138 route list placeholder.
+  139-147 about section.
+  148-173 booking form aur delivery notice.
+  174-175 contact section.
+  176-189 footer.
+  190-216 admin dialog, login form aur admin settings form.
+  217-223 JavaScript include aur HTML closing tags.
+
+script.js:
+  1-115   IIFE, admin URL flag, PWA registration, defaults, bilingual text,
+          service/vehicle metadata, DOM helpers aur initial state.
+  116     defaultVehiclePhoto.
+  117-124 validPhotoUrl.
+  146-147 $ aur $$ DOM query helpers.
+  151     t translation lookup.
+  155     applyLanguage.
+  190 ke aas-paas language button click handler.
+  205     loadSettings.
+  212     normalizeSettings.
+  239     requestSharedSettings.
+  246     refreshSharedSettings.
+  256     formatPhone.
+  261     safeText.
+  267     renderCapabilities.
+  294     renderServiceHighlights.
+  301     menuTargetLabel.
+  314     renderMenuItems.
+  328     renderRoutes.
+  350     renderServiceOptions.
+  360     renderFleet.
+  407     renderSettings.
+  439     updateWhatsAppLink.
+  448     composeMessage.
+  468     smsLink.
+  473     whatsappUrl.
+  479     sendBookingEmail.
+  524     showBookingActions.
+  540 ke aas-paas booking form ka submit handler aur validation/email/fallback.
+  598     setLoginMode.
+  607     fillSettingsForm.
+  620     renderAdminMenuItems.
+  647     renderAdminRoutes.
+  669     renderAdminVehicles.
+  698     translateAdminVehicles.
+  707     showDashboard.
+  723     openAdminDialog.
+  731 ke aas-paas dialog open/close aur admin login submit listeners.
+  779 ke aas-paas vehicle/menu/route add handlers.
+  815 ke aas-paas settings save aur logout handlers.
+  870 ke aas-paas visibility/menu/footer/year startup handlers.
+  895 ke aas-paas IntersectionObserver reveal animation.
+  924 ke aas-paas desktop pointer parallax.
+  941     IIFE close.
+
+api/admin-session.js:
+  1-11    security helper imports.
+  13      Vercel serverless request handler.
+  14-16   GET session status.
+  18-20   same-origin check.
+  22-25   DELETE logout.
+  27-30   supported method check.
+  32-38   server configuration aur rate-limit checks.
+  40-47   JSON body aur username/password input handling.
+  48-54   invalid credentials reject ya successful session issue.
+
+api/settings.js:
+  1-12    shared helper imports.
+  14      Vercel serverless request handler.
+  15-27   GET public settings/defaults aur storage error response.
+  29-34   PUT/method guard.
+  35-39   same-origin/session/configuration guard.
+  41-50   validation, private Blob save aur explicit error responses.
+
+server/admin.js:
+  1-2     Node crypto aur Vercel Blob import.
+  4-16    storage/cookie/size/menu/photo constants.
+  18-45   DEFAULT_SETTINGS.
+  47      respond.
+  57      setCookie.
+  62      isSameOrigin.
+  78      credentialsConfigured.
+  85      equalSecret.
+  91      sessionSignature.
+  95      readCookie.
+  101     hasAdminSession.
+  115     requireSameOrigin.
+  121     requireAdminSession.
+  129     adminConfigurationReady.
+  136     readJsonBody.
+  142     text; 149 email; 155 phone field validators.
+  162     validateSettings.
+  207     readSharedSettings.
+  214     writeSharedSettings.
+  226     clientKey; 232 checkLoginRateLimit; 241 recordLoginFailure;
+          258 clearLoginFailures.
+  262     createSessionCookie; 270 clearSessionCookie.
+  274     credentialsMatch; 282 isPasswordConfigured;
+          286 settingsConfigurationReady.
+
+tests/admin-api.test.js:
+  1-8     Node test/assert imports aur sirf test process ke dummy env values.
+  10-28   API/helper imports, mockResponse.
+  30-43   mock request constructor.
+  45-67   settings validation test.
+  69-87   login cookie/session test.
+  89-105  bad login aur cross-origin rejection test.
+  107-112 unauthenticated PUT rejection test.
+  114-125 default public settings test.
+
+styles.css:
+  1-2     CSS variables, global defaults, header aur hero ki buniyad.
+  3-9     hero art/animations, ticker, section aur card design ke mukhya niyam.
+  10-20   admin dialog/forms aur animation definitions.
+  21-45   responsive rules aur baad mein jode gaye design rules.
+  46-140  coverage/map/customer related rules aur unke responsive/reduced-
+          motion variants; inmein se kuch current HTML mein istemal na hon.
+  141-236 capabilities, vehicle photos/forms/routes/footer/admin editors aur
+          tablet/mobile overrides.
+
+Line numbers source badalne par aage-peeche ho sakte hain. Naam se dhoondhne
+ke liye editor search (Ctrl+F) ya `rg "function naam" script.js` ka upyog karein.
+
+
+20. FILES KA EK-LINE SARANSH
+----------------------------
+
+index.html                Page structure aur metadata.
+styles.css                Visual theme, animation, responsive layout.
+script.js                 Browser UI, translation, booking aur admin UI.
+admin.html                Admin view ka wrapper.
+manifest.json             Installable web app ki browser settings.
+sw.js                     Static app-shell cache/offline behavior.
+icon-192.png              Android/PWA chhota icon.
+icon-512.png              Android/PWA bada icon.
+apple-touch-icon.png      Apple home-screen icon.
+api/admin-session.js      Login/session/logout serverless endpoint.
+api/settings.js           Public read aur protected settings-save endpoint.
+server/admin.js           Auth, validation, rate-limit aur Blob helpers.
+tests/admin-api.test.js   API/security behavior ke automated tests.
+package.json              Node project configuration/dependency/scripts.
+package-lock.json         Exact dependency resolution record.
+node_modules/             Local installed packages; Git mein nahi.
+.gitignore                Generated/private files ko Git se rokta hai.
+ADMIN_SETUP.md            Admin setup aur secret-handling instructions.
+robots.txt                Search crawler directives.
+sitemap.xml               Search engine ke liye site URL.
+app-ads.txt               Advertising declaration; PWA code nahi.
+Designer (3).png          Diya gaya original logo.
+
+END OF GUIDE
